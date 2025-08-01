@@ -1,0 +1,15 @@
+.appContainer {
+  background-color: white;
+  padding: .8vh;
+}
+
+.appContent {
+  border-radius: 1rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 98.4vh;
+  background-color: var(--color-bg);
+}
+
+

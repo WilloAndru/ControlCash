@@ -7,11 +7,13 @@ function App() {
   return (
     <BrowserRouter>
       <div className='appContainer'>
-        <Header />
-        <Routes>
-          <Route path='/' />
-        </Routes>
-        <Footer />
+        <div className='appContent'>
+          <Header />
+          <Routes>
+            <Route path='/' />
+          </Routes>
+          <Footer />
+        </div>
       </div>
     </BrowserRouter>
   )
