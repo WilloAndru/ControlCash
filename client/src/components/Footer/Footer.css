@@ -4,6 +4,6 @@ footer {
   justify-content: center;    
   margin-top: auto;
   background-color: var(--color-bg);
-  height: 8vh;
+  height: 5rem;
   border-top: 2px solid gainsboro;
 }

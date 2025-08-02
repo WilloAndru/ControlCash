@@ -25,6 +25,7 @@ a {
   align-items: center;
   justify-content: center;
   padding: .5rem 1rem;
+  transition: background 0.3s ease;
 }
 
 .authLink {
