@@ -1,9 +1,44 @@
 footer {
-  display: flex;              
-  align-items: center;         
-  justify-content: center;    
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-top: auto;
   background-color: var(--color-bg);
-  height: 5rem;
   border-top: 2px solid gainsboro;
+  padding: 1rem;
+
+  .brandSection {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .brand {
+      padding: 0;
+    }
+  }
+
+  .linkSection {
+    display: flex;
+    gap: 2rem;
+
+    div {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  footer {
+    justify-content: center;
+    .brandSection {
+      img {
+        display: none;
+      }
+      p {
+        display: none;
+      }
+    }
+  }
 }

@@ -1,99 +1,97 @@
 main {
-    margin: 2rem 1.5rem;
-    text-align: center;
+  margin: 2rem 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+
+  .textSection {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
+    gap: 1rem;
 
-    .textSection {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
+    div {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
 
-        div {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-
-            .plansLink {
-                background-color: white;
-            }
-            .plansLink:hover {
-                background-color: whitesmoke;
-            }
-        }
-
-        p {
-            color: gray;
-        }
-    }
-
-    .photoSection {
-        position: relative;
+      .plansLink {
         background-color: white;
-        padding: .5rem;
-        border-radius: 1rem;
-
-        button {
-            background-color: transparent;
-            border: 1px solid white;
-            width: 2.5rem;
-            height: 2.5rem;
-            border-radius: 50%;
-            padding: 0;
-            position: absolute;
-            z-index: 1;
-            color: white;
-            bottom: 2rem;
-        }
-        button:hover {
-            background-color: white;
-            color: black;
-        }
-
-        .left { left: 2rem; }
-
-        .right { left: 5rem; }
-
-        .indicatorContainer {
-            display: flex;
-            gap: .5rem;
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            z-index: 1;
-
-            .indicator {
-                width: 1rem;
-                height: 1rem;
-                border-radius: 50%;
-                border: 1px solid white;
-            }
-        }
-
-
-        .slider {
-            max-width: 900px;
-            aspect-ratio: 16 / 9;
-            overflow: hidden;
-
-            .slides {
-                display: flex;
-                width: 100%;
-                height: 100%;
-                transition: transform 0.5s ease;
-
-                img {
-                    flex: 0 0 100%;       
-                    width: 100%;
-                    object-fit: cover;    
-                    object-position: center;
-                    border-radius: 1rem;  
-                }
-            }
-        }
-
+      }
+      .plansLink:hover {
+        background-color: whitesmoke;
+      }
     }
+  }
+
+  .photoSection {
+    position: relative;
+    background-color: white;
+    padding: 0.5rem;
+    border-radius: 1rem;
+
+    button {
+      background-color: transparent;
+      border: 1px solid white;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      padding: 0;
+      position: absolute;
+      z-index: 1;
+      color: white;
+      bottom: 2rem;
+    }
+    button:hover {
+      background-color: white;
+      color: black;
+    }
+
+    .left {
+      left: 2rem;
+    }
+
+    .right {
+      left: 5rem;
+    }
+
+    .indicatorContainer {
+      display: flex;
+      gap: 0.5rem;
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      z-index: 1;
+
+      .indicator {
+        width: 1rem;
+        height: 1rem;
+        border-radius: 50%;
+        border: 1px solid white;
+      }
+    }
+
+    .slider {
+      max-width: 900px;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+
+      .slides {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.5s ease;
+
+        img {
+          flex: 0 0 100%;
+          width: 100%;
+          object-fit: cover;
+          object-position: center;
+          border-radius: 1rem;
+        }
+      }
+    }
+  }
 }

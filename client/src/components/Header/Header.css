@@ -1,81 +1,65 @@
 header {
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--color-bg);
+  border-bottom: 2px solid gainsboro;
+  padding: 0.5rem;
+  height: 5rem;
+
+  section {
     display: flex;
-    justify-content: space-between;
-    background-color: var(--color-bg);
-    border-bottom: 2px solid gainsboro;
-    padding: .5rem;
-    height: 5rem;
+    align-items: center;
+  }
 
-    .brand {
-        display: flex;
-        align-items: center;
-        gap: .5rem;
-        padding: .5rem 1rem;  
+  .profile {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 1rem;
+    padding: 0.5rem 1rem;
 
-        img {
-            width: 2rem;
-        }
+    .avatarText {
+      p {
+        text-align: end;
+      }
+
+      .paymentPlan {
+        font-size: 0.8rem;
+      }
     }
 
-    section {
-        display: flex;
-        align-items: center;
+    .avatarImg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      border: 1px solid black;
+      border-radius: 50%;
+      overflow: hidden;
 
-        .option:hover {
-            color: var(--color-black-hover);
-        }
+      img {
+        width: 1.5rem;
+      }
     }
-
-    .profile {
-        display: flex;
-        align-items: center;
-        gap: .5rem;
-        border-radius: 1rem;
-        padding: .5rem 1rem;
-
-        .avatarText {
-            p {
-                text-align: end;
-            }
-
-            .paymentPlan {
-                color: var(--color-black-hover);
-                font-size: .8rem;
-            }
-        }
-
-        .avatarImg {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 2.5rem;
-            height: 2.5rem;
-            border: 1px solid black;
-            border-radius: 50%;
-            overflow: hidden;
-
-            img {
-                width: 1.5rem;
-            }
-        }
-    }
-    .profile:hover {
-        background-color: gainsboro;
-    }
+  }
+  .profile:hover {
+    background-color: gainsboro;
+  }
 }
 
 @media (max-width: 768px) {
-    .brand {
-        h3 {
-            display: none;
-        }
+  .brand {
+    h3 {
+      display: none;
     }
+  }
 }
 
 @media (max-width: 480px) {
-    .profile {
-      .avatarText {
-        display: none;
-      }  
+  .profile {
+    .avatarText {
+      display: none;
     }
+  }
 }
