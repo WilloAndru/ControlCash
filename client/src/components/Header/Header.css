@@ -4,6 +4,7 @@ header {
     background-color: var(--color-bg);
     border-bottom: 2px solid gainsboro;
     padding: .5rem;
+    height: 8vh;
 
     .brand {
         display: flex;
@@ -19,6 +20,10 @@ header {
     section {
         display: flex;
         align-items: center;
+
+        .option:hover {
+            color: var(--color-black-hover);
+        }
     }
 
     .profile {
@@ -34,7 +39,7 @@ header {
             }
 
             .paymentPlan {
-                color: gray;
+                color: var(--color-black-hover);
                 font-size: .8rem;
             }
         }

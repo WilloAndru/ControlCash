@@ -1,7 +1,10 @@
-import { Link } from "react-router-dom";
 import "./Header.css";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
 function Header() {
+  const [isLogin] = useState(false);
+
   return (
     <header>
       
@@ -12,17 +15,26 @@ function Header() {
       </Link>
 
       {/* Seccion de opciones */}
-      <section>
-        <Link to="/proyection">Plan de vida</Link>
-      </section>
+      {isLogin && (
+        <section>
+          <Link to="/proyection" className="option">Proyection</Link>
+        </section>
+      )}
+      
+      {/* Seccion derecha */}
+      {!isLogin ? (
+        
+        //Seccion de auth
+        <Link to="/auth" className="authLink btn">Get started</Link>
+      ) : (
 
-      {/* Seccion de perfil */}
-      <Link to="/profile" className="profile">
+        //Seccion de perfil
+        <Link to="/profile" className="profile">
 
         {/* Contenedor con texto */}
         <div className="avatarText">
-          <p>Nombre Usuario</p>
-          <p className="paymentPlan">Tipo Plan</p>
+          <p>User name</p>
+          <p className="paymentPlan">Plan type</p>
         </div>
 
         {/* Avatar */}
@@ -30,6 +42,7 @@ function Header() {
           <img src="icon.png" alt="User Image" />
         </div>
       </Link>
+      )}
     </header>
   );
 }

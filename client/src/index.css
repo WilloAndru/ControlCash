@@ -10,11 +10,27 @@
 
 :root {
   --color-bg: #f0f0f0;
-  --color-text: #1E293B;
-  --color-primary: #2563EB;
-  --color-primary-hover: #1E40AF;
+  --color-black: #1E293B;
+  --color-black-hover: #4a5569;
 }
 
 a {
   text-decoration: none;
+}
+
+/* Botones o links reciclados */
+.btn, button {
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: .5rem 1rem;
+}
+
+.authLink {
+  background-color: var(--color-black);
+  color: white;
+}
+.authLink:hover {
+  background-color: var(--color-black-hover);
 }

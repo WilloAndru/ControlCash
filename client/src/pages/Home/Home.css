@@ -1,0 +1,58 @@
+main {
+    margin: 2rem 1.5rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+
+    .textSection {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+
+        div {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+
+            .plansLink {
+                background-color: white;
+            }
+            .plansLink:hover {
+                background-color: whitesmoke;
+            }
+        }
+
+        p {
+            color: gray;
+        }
+    }
+
+    .photoSection {
+        background-color: white;
+        border-radius: 1rem;
+        width: 96vh;
+        height: 48vh;
+
+        button {
+            border: 1px solid black;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            padding: 0;
+        }
+    }
+}
+
+
+@media (max-width: 768px) {
+    main {
+      .textSection {
+        p {
+            display: none;
+        }
+      }  
+    }
+}
