@@ -1,0 +1,10 @@
+main {
+}
+
+@media (max-width: 768px) {
+  .brand {
+    h3 {
+      display: block;
+    }
+  }
+}
