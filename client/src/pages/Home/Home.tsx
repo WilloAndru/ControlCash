@@ -29,7 +29,7 @@ function Home() {
   };
 
   return (
-    <main>
+    <main className="home">
       {/* Seccion de introduccion textual */}
       <section className="textSection">
         <p className="textGray">Optimize your finances</p>
