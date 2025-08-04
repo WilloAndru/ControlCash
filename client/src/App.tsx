@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
@@ -7,7 +7,7 @@ import Auth from "./pages/Auth/Auth";
 
 function App() {
   const location = useLocation();
-  const hideLayout = location.pathname === "/auth"; // ✅ Ocultar en /auth
+  const hideLayout = location.pathname === "/auth";
 
   return (
     <div className="appContainer">
@@ -25,10 +25,4 @@ function App() {
   );
 }
 
-export default function AppWrapper() {
-  return (
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  );
-}
+export default App;

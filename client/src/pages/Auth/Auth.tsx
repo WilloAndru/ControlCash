@@ -1,7 +1,20 @@
 import { Link } from "react-router-dom";
+import { signInWithPopup } from "firebase/auth";
+import { auth, provider } from "../../firebase/firebase";
+import { FcGoogle } from "react-icons/fc";
 import "./Auth.css";
 
 function Auth() {
+  const loginWithGoogle = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      console.log("Usuario:", user);
+    } catch (error) {
+      console.error("Error en login:", error);
+    }
+  };
+
   return (
     <main className="auth">
       {/* Formulario Auth */}
@@ -13,7 +26,7 @@ function Auth() {
         </Link>
 
         {/* Div que va en el centro */}
-        <div className="centerContainer">
+        <div>
           {/* Div de bienvenida */}
           <div>
             <h1>Welcome</h1>
@@ -22,7 +35,10 @@ function Auth() {
             </p>
           </div>
           {/* Boton de google */}
-          <button>Google</button>
+          <button onClick={loginWithGoogle}>
+            <FcGoogle className="iconGoogle" />
+            Login with Google
+          </button>
         </div>
 
         {/* Terminos */}
