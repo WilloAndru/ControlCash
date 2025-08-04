@@ -57,3 +57,10 @@ button {
 .textGray {
   color: gray;
 }
+
+.errorMessage {
+  background-color: red;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 1rem;
+}

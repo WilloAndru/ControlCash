@@ -1,5 +1,8 @@
-import express from 'express'
+import express from "express";
+import { authGoogle } from "../controllers/userController.js";
 
 const router = express.Router();
 
- export default router;
+router.post("/google", authGoogle);
+
+export default router;

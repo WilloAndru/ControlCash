@@ -1,6 +1,7 @@
 # Ignorar node_modules de client y server
 client/node_modules/
 server/node_modules/
+server/firebase/serviceAccountKey.json
 
 # Ignorar .env y variantes en client
 client/.env
