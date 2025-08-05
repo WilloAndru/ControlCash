@@ -10,6 +10,7 @@
 
 :root {
   --color-bg: #f0f0f0;
+  --color-gray: gray;
   --color-black: #1e293b;
   --color-black-hover: #4a5569;
 }

@@ -11,40 +11,44 @@ header {
     align-items: center;
   }
 
-  .profile {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    border-radius: 1rem;
-    padding: 0.5rem 1rem;
+  .profileSection {
+    position: relative;
 
-    .avatarText {
-      p {
-        text-align: end;
-      }
-
-      .paymentPlan {
-        font-size: 0.8rem;
-      }
-    }
-
-    .avatarImg {
+    .profile {
       display: flex;
       align-items: center;
-      justify-content: center;
-      width: 2.5rem;
-      height: 2.5rem;
-      border: 1px solid black;
-      border-radius: 50%;
-      overflow: hidden;
+      gap: 0.5rem;
+      border-radius: 1rem;
+      padding: 0.5rem 1rem;
 
-      img {
-        width: 100%;
+      .avatarText {
+        p {
+          text-align: end;
+        }
+
+        .paymentPlan {
+          font-size: 0.8rem;
+        }
+      }
+
+      .avatarImg {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.5rem;
+        height: 2.5rem;
+        border: 1px solid black;
+        border-radius: 50%;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+        }
       }
     }
-  }
-  .profile:hover {
-    background-color: gainsboro;
+    .profile:hover {
+      background-color: gainsboro;
+    }
   }
 }
 

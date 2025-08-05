@@ -1,9 +1,33 @@
 import "./Header.css";
 import { Link } from "react-router-dom";
+import UserDropdown from "./UserDropdown";
+import { useRef, useState, useEffect } from "react";
 
 function Header() {
   const stored = localStorage.getItem("userData");
   const userData = stored ? JSON.parse(stored) : null;
+  const [hoverProfile, setHoverProfile] = useState(false);
+  const profileRef = useRef<HTMLDivElement>(null); //Ts estricto
+  const dropdownRef = useRef<HTMLDivElement>(null); //Ts estricto
+
+  // Cierre del menú desplegable por clic externo
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Node;
+      if (
+        profileRef.current &&
+        dropdownRef.current &&
+        !profileRef.current.contains(target) &&
+        !dropdownRef.current.contains(target)
+      ) {
+        setHoverProfile(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <header>
@@ -24,23 +48,35 @@ function Header() {
 
       {/* Seccion derecha */}
       {!userData ? (
-        //Seccion de auth
+        //Seccion de autenticacion
         <Link to="/auth" className="authLink btn">
           Get started
         </Link>
       ) : (
         //Seccion de perfil
-        <Link to="/profile" className="profile">
-          {/* Contenedor con texto */}
-          <div className="avatarText">
-            <p>{userData.name.split(" ")[0]}</p>
-            <p className="paymentPlan textGray">{userData.planType}</p>
-          </div>
-          {/* Avatar */}
-          <div className="avatarImg">
-            <img src={userData.avatar} alt="User Image" />
-          </div>
-        </Link>
+        <section
+          ref={profileRef}
+          className="profileSection"
+          onClick={() => setHoverProfile(!hoverProfile)}
+        >
+          <Link to="/profile" className="profile">
+            {/* Contenedor con texto */}
+            <div className="avatarText">
+              <p>{userData.name.split(" ")[0]}</p>
+              <p className="paymentPlan textGray">{userData.planType}</p>
+            </div>
+
+            {/* Avatar */}
+            <div className="avatarImg">
+              <img src={userData.avatar} alt="User Image" />
+            </div>
+          </Link>
+
+          {/* Dropdown que aparece al hacer hover */}
+          {hoverProfile && (
+            <UserDropdown email={userData.email} ref={dropdownRef} />
+          )}
+        </section>
       )}
     </header>
   );

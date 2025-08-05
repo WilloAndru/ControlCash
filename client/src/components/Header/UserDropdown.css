@@ -1,4 +1,32 @@
 .userDropdown {
-  background-color: var(--color-bg);
+  background-color: white;
   width: 5rem;
+  position: absolute;
+  border-radius: 1rem;
+  top: 100%;
+  right: 0;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+
+  div {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: end;
+    padding: 0.8rem 1rem;
+    border-radius: 1rem;
+    width: 100%;
+
+    * {
+      font-size: 0.9rem;
+    }
+
+    .icon {
+      font-size: 1.2rem;
+    }
+  }
+  div:hover {
+    background-color: var(--color-bg);
+  }
 }
