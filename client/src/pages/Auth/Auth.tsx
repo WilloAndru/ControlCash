@@ -12,32 +12,37 @@ function Auth() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  //funcion de auth con google
+  //Funcion de autenticacion con google
   const authWithGoogle = async () => {
     try {
+      // Autentica al usuario con Google mediante una ventana emergente
       const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-
-      const token = await user.getIdToken();
-
+      // Obtiene el token de autenticación del usuario
+      const token = await result.user.getIdToken();
+      // Envía el token al backend para validación e inicio de sesión
       const response = await axios.post(`${baseURL}/google`, { token });
-
+      // Guarda los datos de usuario en el localstorage y redirigue al home
       if (response.status === 200) {
+        const userData = {
+          uid: response.data.user.uid,
+          name: response.data.user.name,
+          email: response.data.user.email,
+          avatar: response.data.user.avatar,
+          planType: response.data.user.planType,
+        };
+        localStorage.setItem("userData", JSON.stringify(userData));
         navigate("/");
       } else {
-        setError("Authentication failed on the server.");
+        setError("Server authentication failed.");
       }
-    } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        setError(
-          error.response?.data?.error ||
-            "Authentication with the server failed."
-        );
-      } else if (error instanceof Error) {
-        setError(error.message);
-      } else {
-        setError("Unexpected error occurred.");
-      }
+    } catch (err) {
+      const message = axios.isAxiosError(err)
+        ? err.response?.data?.error || "Server error during authentication."
+        : err instanceof Error
+        ? err.message
+        : "Unexpected error occurred.";
+
+      setError(message);
     }
   };
 

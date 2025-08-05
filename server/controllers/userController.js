@@ -8,14 +8,15 @@ export const authGoogle = async (req, res) => {
     const decodedToken = await admin.auth().verifyIdToken(token);
     const { email, name, picture, uid } = decodedToken;
 
-    let user = await UserModel.findOne({ where: { firebaseUid: uid } });
+    let user = await UserModel.findOne({ where: { uid: uid } });
 
     if (!user) {
       user = await UserModel.create({
-        firebaseUid: uid,
+        uid,
         name,
         email,
         avatar: picture,
+        planType: "free",
       });
     }
 

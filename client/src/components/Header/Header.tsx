@@ -1,9 +1,9 @@
 import "./Header.css";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 
 function Header() {
-  const [isLogin] = useState(false);
+  const stored = localStorage.getItem("userData");
+  const userData = stored ? JSON.parse(stored) : null;
 
   return (
     <header>
@@ -14,7 +14,7 @@ function Header() {
       </Link>
 
       {/* Seccion de opciones */}
-      {isLogin && (
+      {userData && (
         <section>
           <Link to="/proyection" className="optionLink">
             Proyection
@@ -23,7 +23,7 @@ function Header() {
       )}
 
       {/* Seccion derecha */}
-      {!isLogin ? (
+      {!userData ? (
         //Seccion de auth
         <Link to="/auth" className="authLink btn">
           Get started
@@ -33,13 +33,12 @@ function Header() {
         <Link to="/profile" className="profile">
           {/* Contenedor con texto */}
           <div className="avatarText">
-            <p>User name</p>
-            <p className="paymentPlan textGray">Plan type</p>
+            <p>{userData.name.split(" ")[0]}</p>
+            <p className="paymentPlan textGray">{userData.planType}</p>
           </div>
-
           {/* Avatar */}
           <div className="avatarImg">
-            <img src="icon.png" alt="User Image" />
+            <img src={userData.avatar} alt="User Image" />
           </div>
         </Link>
       )}

@@ -39,7 +39,7 @@ header {
       overflow: hidden;
 
       img {
-        width: 1.5rem;
+        width: 100%;
       }
     }
   }
