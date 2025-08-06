@@ -13,16 +13,28 @@ interface UserDropdownProps {
 const UserDropdown = forwardRef<HTMLElement, UserDropdownProps>(
   ({ email }, ref) => {
     const itemsList = [
-      { icon: <FaRegUserCircle className="icon" />, text: email },
-      { icon: <GrDiamond className="icon" />, text: "Switch to a higher plan" },
-      { icon: <DiAptana className="icon" />, text: "Configuration" },
-      { icon: <PiSignOutBold className="icon" />, text: "Log out" },
+      { icon: <FaRegUserCircle className="icon" />, text: email, onClick: "/" },
+      {
+        icon: <GrDiamond className="icon" />,
+        text: "Switch to a higher plan",
+        onClick: "/",
+      },
+      {
+        icon: <DiAptana className="icon" />,
+        text: "Configuration",
+        onClick: "/",
+      },
+      {
+        icon: <PiSignOutBold className="icon" />,
+        text: "Log out",
+        onClick: "/",
+      },
     ];
 
     return (
       <section ref={ref} className="userDropdown">
         {itemsList.map((item, index) => (
-          <div key={index}>
+          <div key={index} onClick={item.onClick}>
             <span>{item.text}</span>
             {item.icon}
           </div>
