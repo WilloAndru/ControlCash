@@ -6,11 +6,12 @@ import { useRef, useState, useEffect } from "react";
 function Header() {
   const stored = localStorage.getItem("userData");
   const userData = stored ? JSON.parse(stored) : null;
+
+  //Logica de div desplegable
   const [hoverProfile, setHoverProfile] = useState(false);
   const profileRef = useRef<HTMLDivElement>(null); //Ts estricto
   const dropdownRef = useRef<HTMLDivElement>(null); //Ts estricto
-
-  // Cierre del menú desplegable por clic externo
+  //Cierre del menú desplegable por clic externo
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Node;
@@ -74,7 +75,12 @@ function Header() {
 
           {/* Dropdown que aparece al hacer hover */}
           {hoverProfile && (
-            <UserDropdown email={userData.email} ref={dropdownRef} />
+            <UserDropdown
+              email={userData.email}
+              planType={userData.planType}
+              planExpirationDate={userData.planExpirationDate}
+              ref={dropdownRef}
+            />
           )}
         </section>
       )}

@@ -12,4 +12,5 @@ export const UserModel = db.define("users", {
     defaultValue: "free",
     allowNull: false,
   },
+  planExpirationDate: { type: DataTypes.DATE, allowNull: true },
 });

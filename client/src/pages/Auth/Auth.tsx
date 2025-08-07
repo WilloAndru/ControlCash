@@ -29,6 +29,7 @@ function Auth() {
           email: response.data.user.email,
           avatar: response.data.user.avatar,
           planType: response.data.user.planType,
+          planExpirationDate: response.data.user.planExpirationDate,
         };
         localStorage.setItem("userData", JSON.stringify(userData));
         navigate("/");

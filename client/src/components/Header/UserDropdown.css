@@ -10,13 +10,15 @@
   flex-direction: column;
   padding: 0.5rem;
 
-  div {
+  button {
     display: flex;
     gap: 0.5rem;
     justify-content: end;
     padding: 0.8rem 1rem;
     border-radius: 1rem;
     width: 100%;
+    background-color: transparent;
+    border: none;
 
     * {
       font-size: 0.9rem;
@@ -26,7 +28,7 @@
       font-size: 1.2rem;
     }
   }
-  div:hover {
+  button:hover {
     background-color: var(--color-bg);
   }
 }

@@ -17,6 +17,7 @@ export const authGoogle = async (req, res) => {
         email,
         avatar: picture,
         planType: "free",
+        plantExpirationDate: null,
       });
     }
 
