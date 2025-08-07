@@ -33,13 +33,13 @@ const UserDropdown = forwardRef<HTMLElement, UserDropdownProps>(
           planType === "free"
             ? "Switch to higher plan"
             : `You have ${getDaysRemaining(planExpirationDate)} days left`,
-        onClick: () => navigate("/viewPlans"),
+        onClick: () => navigate("/planCost"),
       },
       //Configuracion general
       {
         icon: <DiAptana className="icon" />,
         text: "Configuration",
-        onClick: () => navigate("/profile"),
+        onClick: () => navigate("/configuration"),
       },
       //Cierre de sesion
       {
@@ -53,7 +53,12 @@ const UserDropdown = forwardRef<HTMLElement, UserDropdownProps>(
     ];
 
     return (
-      <section ref={ref} className="userDropdown">
+      <section
+        ref={ref}
+        className="userDropdown"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Lista de opciones de usuario */}
         {itemsList.map((item, index) => (
           <button key={index} onClick={item.onClick}>
             <span>{item.text}</span>

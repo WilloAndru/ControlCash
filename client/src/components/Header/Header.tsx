@@ -60,7 +60,7 @@ function Header() {
           className="profileSection"
           onClick={() => setHoverProfile(!hoverProfile)}
         >
-          <Link to="/profile" className="profile">
+          <button className="profile">
             {/* Contenedor con texto */}
             <div className="avatarText">
               <p>{userData.name.split(" ")[0]}</p>
@@ -71,7 +71,7 @@ function Header() {
             <div className="avatarImg">
               <img src={userData.avatar} alt="User Image" />
             </div>
-          </Link>
+          </button>
 
           {/* Dropdown que aparece al hacer hover */}
           {hoverProfile && (
