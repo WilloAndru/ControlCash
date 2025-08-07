@@ -1,4 +1,4 @@
-import { forwardRef } from "react"; //soporte de ref en componentes hijos
+import { forwardRef, useState } from "react"; //soporte de ref en componentes hijos
 import "./UserDropdown.css";
 import { FaRegUserCircle } from "react-icons/fa";
 import { GrDiamond } from "react-icons/gr";
@@ -6,6 +6,8 @@ import { DiAptana } from "react-icons/di";
 import { PiSignOutBold } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 import { getDaysRemaining } from "../../utils/getDaysRemaining "; //funcion para calcular los dias restantes del plan premium
+import Profile from "../../pages/PagesDropdown/Profile";
+import Configuration from "../../pages/PagesDropdown/Configuration";
 
 //prop email de componente padre (Ts estricto)
 interface UserDropdownProps {
@@ -14,8 +16,11 @@ interface UserDropdownProps {
   planExpirationDate: string | null;
 }
 
-const UserDropdown = forwardRef<HTMLElement, UserDropdownProps>(
+const UserDropdown = forwardRef<HTMLDivElement, UserDropdownProps>(
   ({ email, planType, planExpirationDate }, ref) => {
+    //Estados para controlar las paginas desplegables dentro del dropdown
+    const [isProfile, setIsProfile] = useState(false);
+    const [isConfiguration, setIsConfiguration] = useState(false);
     const navigate = useNavigate();
 
     //Lista de opciones de perfil
@@ -24,7 +29,7 @@ const UserDropdown = forwardRef<HTMLElement, UserDropdownProps>(
       {
         icon: <FaRegUserCircle className="icon" />,
         text: email,
-        onClick: () => navigate("/profile"),
+        onClick: () => setIsProfile(true),
       },
       //Opcion de cambiar plan o ver plan premium
       {
@@ -39,7 +44,7 @@ const UserDropdown = forwardRef<HTMLElement, UserDropdownProps>(
       {
         icon: <DiAptana className="icon" />,
         text: "Configuration",
-        onClick: () => navigate("/configuration"),
+        onClick: () => setIsConfiguration(true),
       },
       //Cierre de sesion
       {
@@ -53,6 +58,7 @@ const UserDropdown = forwardRef<HTMLElement, UserDropdownProps>(
     ];
 
     return (
+      // Contenedor principal del menu desplegable de usuario
       <section ref={ref} className="userDropdown">
         {/* Lista de opciones de usuario */}
         {itemsList.map((item, index) => (
@@ -61,6 +67,10 @@ const UserDropdown = forwardRef<HTMLElement, UserDropdownProps>(
             {item.icon}
           </button>
         ))}
+
+        {/* Paginas desplegables dentro del menu */}
+        {isProfile && <Profile />}
+        {isConfiguration && <Configuration />}
       </section>
     );
   }

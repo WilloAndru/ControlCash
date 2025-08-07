@@ -67,29 +67,22 @@ button {
 }
 
 /* Interfaces */
-.overlay {
+.pageDropdown {
+  z-index: 2;
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0.3);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  width: 70vw;
+  height: 80vh;
+  border-radius: 1rem;
+  padding: 0.4rem;
 
-  .pageDropdown {
-    width: 70vw;
-    height: 80vh;
-    background: white;
+  section {
+    background-color: var(--color-bg);
     border-radius: 1rem;
-    padding: 0.4rem;
-
-    section {
-      background-color: var(--color-bg);
-      border-radius: 1rem;
-      padding: 1rem 1.5rem;
-      height: 100%;
-    }
+    padding: 1rem 1.5rem;
+    height: 100%;
   }
 }

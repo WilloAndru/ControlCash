@@ -10,9 +10,4 @@
     min-height: 98.4vh;
     background-color: var(--color-bg);
   }
-
-  .blurred {
-    background-color: var(--color-bg);
-    filter: blur(2px);
-  }
 }

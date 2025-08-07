@@ -8,25 +8,30 @@ function Header() {
   const userData = stored ? JSON.parse(stored) : null;
 
   //Logica de div desplegable
-  const [hoverProfile, setHoverProfile] = useState(false);
-  const profileRef = useRef<HTMLDivElement>(null); //Ts estricto
-  const dropdownRef = useRef<HTMLDivElement>(null); //Ts estricto
+  const [isProfile, setIsProfile] = useState(false);
+  const profileRef = useRef<HTMLDivElement>(null); //Referencia del boton perfil
+  const dropdownRef = useRef<HTMLDivElement>(null); //Referencia del menu desplegable
+
   //Cierre del menú desplegable por clic externo
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Node;
-      if (
-        profileRef.current &&
-        dropdownRef.current &&
-        !profileRef.current.contains(target) &&
-        !dropdownRef.current.contains(target)
-      ) {
-        setHoverProfile(false);
+      if (dropdownRef.current && dropdownRef.current.contains(target)) {
+        return;
       }
+      if (profileRef.current && profileRef.current.contains(target)) {
+        console.log(2);
+        setIsProfile((prev) => !prev);
+        return;
+      }
+      // Click fuera → cerrar
+      console.log(3);
+      setIsProfile(false);
     };
-    document.addEventListener("mousedown", handleClickOutside);
+
+    document.addEventListener("mouseup", handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("mouseup", handleClickOutside);
     };
   }, []);
 
@@ -55,11 +60,7 @@ function Header() {
         </Link>
       ) : (
         //Seccion de perfil
-        <section
-          ref={profileRef}
-          className="profileSection"
-          onClick={() => setHoverProfile(!hoverProfile)}
-        >
+        <section ref={profileRef} className="profileSection">
           <button className="profile">
             {/* Contenedor con texto */}
             <div className="avatarText">
@@ -74,7 +75,7 @@ function Header() {
           </button>
 
           {/* Dropdown que aparece al hacer hover */}
-          {hoverProfile && (
+          {isProfile && (
             <UserDropdown
               email={userData.email}
               planType={userData.planType}
