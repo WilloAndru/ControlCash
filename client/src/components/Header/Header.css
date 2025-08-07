@@ -24,6 +24,7 @@ header {
 
       .avatarText {
         p {
+          font-size: 1rem;
           text-align: end;
         }
 

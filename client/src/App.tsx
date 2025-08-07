@@ -4,27 +4,34 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Home from "./pages/Home/Home";
 import Auth from "./pages/Auth/Auth";
-import Profile from "./pages/Profle/Profile";
 import PlanCost from "./pages/PlanCost/PlanCost";
 import Configuration from "./pages/Configuration/Configuration";
+import Profile from "./pages/Profle/Profile";
 
 function App() {
   const location = useLocation();
-  const hideLayout = location.pathname === "/auth"; // ocultar header y footer en auth
+  const hideLayout = location.pathname === "/auth";
+  const isModalRoute =
+    location.pathname === "/profile" || location.pathname === "/configuration";
 
   return (
     <div className="appContainer">
-      <div className="appContent">
+      <div className={`appContent ${isModalRoute ? "blurred" : ""}`}>
         {!hideLayout && <Header />}
-        <Routes>
+        <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Home />} />
           <Route path="/auth" element={<Auth />} />
-          <Route path="/profile" element={<Profile />} />
           <Route path="/planCost" element={<PlanCost />} />
-          <Route path="/configuration" element={<Configuration />} />
         </Routes>
         {!hideLayout && <Footer />}
       </div>
+
+      {isModalRoute && (
+        <Routes>
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/configuration" element={<Configuration />} />
+        </Routes>
+      )}
     </div>
   );
 }

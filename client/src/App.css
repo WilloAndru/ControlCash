@@ -1,15 +1,18 @@
 .appContainer {
   background-color: white;
-  padding: .8vh;
+  padding: 0.4rem;
+
+  .appContent {
+    border-radius: 1rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 98.4vh;
+    background-color: var(--color-bg);
+  }
+
+  .blurred {
+    background-color: var(--color-bg);
+    filter: blur(2px);
+  }
 }
-
-.appContent {
-  border-radius: 1rem;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  min-height: 98.4vh;
-  background-color: var(--color-bg);
-}
-
-

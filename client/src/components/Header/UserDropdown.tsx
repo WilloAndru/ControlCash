@@ -53,11 +53,7 @@ const UserDropdown = forwardRef<HTMLElement, UserDropdownProps>(
     ];
 
     return (
-      <section
-        ref={ref}
-        className="userDropdown"
-        onClick={(e) => e.stopPropagation()}
-      >
+      <section ref={ref} className="userDropdown">
         {/* Lista de opciones de usuario */}
         {itemsList.map((item, index) => (
           <button key={index} onClick={item.onClick}>
