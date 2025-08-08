@@ -1,4 +1,4 @@
-import { forwardRef, useState } from "react"; //soporte de ref en componentes hijos
+import { forwardRef } from "react"; //soporte de ref en componentes hijos
 import "./UserDropdown.css";
 import { FaRegUserCircle } from "react-icons/fa";
 import { GrDiamond } from "react-icons/gr";
@@ -6,21 +6,22 @@ import { DiAptana } from "react-icons/di";
 import { PiSignOutBold } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 import { getDaysRemaining } from "../../utils/getDaysRemaining "; //funcion para calcular los dias restantes del plan premium
-import Profile from "../../pages/PagesDropdown/Profile";
-import Configuration from "../../pages/PagesDropdown/Configuration";
 
 //prop email de componente padre (Ts estricto)
 interface UserDropdownProps {
   email: string;
   planType: string;
   planExpirationDate: string | null;
+  setIsProfile: Function;
+  setIsConfiguration: Function;
 }
 
 const UserDropdown = forwardRef<HTMLDivElement, UserDropdownProps>(
-  ({ email, planType, planExpirationDate }, ref) => {
+  (
+    { email, planType, planExpirationDate, setIsProfile, setIsConfiguration },
+    ref
+  ) => {
     //Estados para controlar las paginas desplegables dentro del dropdown
-    const [isProfile, setIsProfile] = useState(false);
-    const [isConfiguration, setIsConfiguration] = useState(false);
     const navigate = useNavigate();
 
     //Lista de opciones de perfil
@@ -58,7 +59,6 @@ const UserDropdown = forwardRef<HTMLDivElement, UserDropdownProps>(
     ];
 
     return (
-      // Contenedor principal del menu desplegable de usuario
       <section ref={ref} className="userDropdown">
         {/* Lista de opciones de usuario */}
         {itemsList.map((item, index) => (
@@ -67,10 +67,6 @@ const UserDropdown = forwardRef<HTMLDivElement, UserDropdownProps>(
             {item.icon}
           </button>
         ))}
-
-        {/* Paginas desplegables dentro del menu */}
-        {isProfile && <Profile />}
-        {isConfiguration && <Configuration />}
       </section>
     );
   }
