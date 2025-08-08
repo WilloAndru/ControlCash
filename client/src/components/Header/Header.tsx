@@ -48,7 +48,7 @@ function Header() {
   }, []);
 
   return (
-    <header>
+    <header className="header">
       {/* Seccion de marca */}
       <Link to="/" className="brand">
         <img src="icon.png" alt="Icon" />

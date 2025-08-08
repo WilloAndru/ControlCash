@@ -2,8 +2,10 @@ function Configuration() {
   return (
     <div className="pageDropdown">
       <section>
-        <h2>Profile Page</h2>
-        <p>Contenido del config...</p>
+        <div>
+          <h2>Profile Page</h2>
+          <p>Contenido del config...</p>
+        </div>
       </section>
     </div>
   );
