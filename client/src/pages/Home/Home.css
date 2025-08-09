@@ -16,13 +16,6 @@
       display: flex;
       align-items: center;
       gap: 1rem;
-
-      .plansLink {
-        background-color: white;
-      }
-      .plansLink:hover {
-        background-color: whitesmoke;
-      }
     }
   }
 

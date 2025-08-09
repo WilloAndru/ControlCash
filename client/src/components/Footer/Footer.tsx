@@ -3,7 +3,7 @@ import "./Footer.css";
 
 function Footer() {
   return (
-    <footer>
+    <footer className="footer">
       {/* Seccion del eslogan */}
       <section className="brandSection">
         <div className="brand">

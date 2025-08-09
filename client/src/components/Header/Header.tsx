@@ -118,8 +118,13 @@ function Header() {
       )}
 
       {/* Paginas desplegables del menu */}
-      {isProfile && <Profile ref={profilePageRef} />}
-      {isConfiguration && <Configuration ref={configurationPageRef} />}
+      {isProfile && <Profile ref={profilePageRef} setIsShow={setIsProfile} />}
+      {isConfiguration && (
+        <Configuration
+          ref={configurationPageRef}
+          setIsShow={setIsConfiguration}
+        />
+      )}
     </header>
   );
 }

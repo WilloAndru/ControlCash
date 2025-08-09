@@ -45,10 +45,10 @@ function Home() {
         </p>
 
         <div>
-          <Link to="/viewPlans" className="plansLink btn">
+          <Link to="/viewPlans" className="styleBtnWhite btn">
             View plans
           </Link>
-          <Link to="/auth" className="authLink btn">
+          <Link to="/auth" className="styleBtnBlack btn">
             Get started
           </Link>
         </div>
