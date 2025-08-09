@@ -11,12 +11,14 @@ function Header() {
 
   //Logica de div desplegable
   const [isMenu, setIsMenu] = useState(false);
-  const profileRef = useRef<HTMLDivElement>(null); //Referencia del boton perfil
+  const menuRef = useRef<HTMLDivElement>(null); //Referencia del boton perfil
   const dropdownRef = useRef<HTMLDivElement>(null); //Referencia del menu desplegable
+  const profilePageRef = useRef<HTMLDivElement>(null); //Referencia a la pagina perfil
+  const configurationPageRef = useRef<HTMLDivElement>(null); //Referencia a la pagina configuracion
   const [isProfile, setIsProfile] = useState(false);
   const [isConfiguration, setIsConfiguration] = useState(false);
 
-  //Cierre del menú desplegable por clic externo
+  //Cierres o despliege de los refs
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Node;
@@ -30,8 +32,23 @@ function Header() {
       }
 
       // Click al boton de perfil
-      if (profileRef.current && profileRef.current.contains(target)) {
+      if (menuRef.current && menuRef.current.contains(target)) {
         setIsMenu((prev) => !prev);
+        return;
+      }
+
+      //Click dentro de la pagina profile
+      if (profilePageRef.current && profilePageRef.current.contains(target)) {
+        setIsProfile(true);
+        return;
+      }
+
+      //Click dentro de la pagina configuration
+      if (
+        configurationPageRef.current &&
+        configurationPageRef.current.contains(target)
+      ) {
+        setIsConfiguration(true);
         return;
       }
 
@@ -72,7 +89,7 @@ function Header() {
         </Link>
       ) : (
         //Seccion de perfil
-        <section ref={profileRef} className="profileSection">
+        <section ref={menuRef} className="profileSection">
           <button className="profile">
             {/* Contenedor con texto */}
             <div className="avatarText">
@@ -101,8 +118,8 @@ function Header() {
       )}
 
       {/* Paginas desplegables del menu */}
-      {isProfile && <Profile />}
-      {isConfiguration && <Configuration />}
+      {isProfile && <Profile ref={profilePageRef} />}
+      {isConfiguration && <Configuration ref={configurationPageRef} />}
     </header>
   );
 }
