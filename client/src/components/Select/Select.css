@@ -1,27 +1,30 @@
-.select-trigger {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 6px 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  background: white;
-  cursor: pointer;
-}
+.select {
+  button {
+    border: none;
+    display: flex;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    position: relative;
+    gap: 0.5rem;
 
-.select-content {
-  background: white;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  margin-top: 4px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
+    &:hover {
+      background-color: gainsboro;
+    }
+  }
 
-.select-item {
-  padding: 6px 10px;
-  cursor: pointer;
-}
+  .selectDropDown {
+    background-color: var(--color-bg);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    box-shadow: inset;
 
-.select-item:hover {
-  background: #f0f0f0;
+    div {
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+
+      &:hover {
+        background-color: white;
+      }
+    }
+  }
 }

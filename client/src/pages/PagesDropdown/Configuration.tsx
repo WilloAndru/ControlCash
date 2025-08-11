@@ -1,4 +1,4 @@
-import { useState, forwardRef } from "react";
+import { forwardRef } from "react";
 import { IoClose } from "react-icons/io5";
 import Select from "../../components/Select/Select";
 
@@ -8,14 +8,7 @@ interface ConfigurationProps {
 
 const Configuration = forwardRef<HTMLDivElement, ConfigurationProps>(
   ({ setIsShow }, ref) => {
-    const [themeColor, setThemeColor] = useState(
-      localStorage.getItem("themeColor") || "white"
-    );
-
-    const handleChange = (newValue: string) => {
-      setThemeColor(newValue);
-      localStorage.setItem("themeColor", newValue);
-    };
+    const themeColor = localStorage.getItem("themeColor") || "White";
 
     return (
       <div className="pageDropdown">
@@ -34,16 +27,14 @@ const Configuration = forwardRef<HTMLDivElement, ConfigurationProps>(
 
             {/* Selects */}
             <main>
-              <div>
+              <div className="divSelect">
                 <h4>Theme</h4>
                 <Select
-                  value={themeColor}
-                  onChange={handleChange}
-                  options={[
-                    { value: "white", label: "White" },
-                    { value: "black", label: "Black" },
-                  ]}
-                  placeholder="Chose a theme"
+                  title={themeColor}
+                  options={["White", "Black"]}
+                  action={(value) => {
+                    localStorage.setItem("themeColor", value);
+                  }}
                 />
               </div>
             </main>

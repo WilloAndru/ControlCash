@@ -1,50 +1,40 @@
-import * as RadixSelect from "@radix-ui/react-select";
-import { ChevronDownIcon, CheckIcon } from "@radix-ui/react-icons";
+import { useState } from "react";
 import "./Select.css";
+import { IoIosArrowDown } from "react-icons/io";
 
-interface Option {
-  value: string;
-  label: string;
+interface SelectProps {
+  title: string;
+  options: string[];
+  action: (value: string) => void;
 }
 
-interface Props {
-  value: string;
-  onChange: (value: string) => void;
-  options: Option[];
-  placeholder?: string;
-}
+function Select({ title, options, action }: SelectProps) {
+  const [isClick, setIsClick] = useState(false);
 
-export default function Select({
-  value,
-  onChange,
-  options,
-  placeholder,
-}: Props) {
   return (
-    <RadixSelect.Root value={value} onValueChange={onChange}>
-      <RadixSelect.Trigger className="select-trigger">
-        <RadixSelect.Value placeholder={placeholder || "Selecciona..."} />
-        <RadixSelect.Icon>
-          <ChevronDownIcon />
-        </RadixSelect.Icon>
-      </RadixSelect.Trigger>
+    <div className="select">
+      <button onClick={() => setIsClick(!isClick)}>
+        <p>{title}</p>
+        <IoIosArrowDown />
+      </button>
 
-      <RadixSelect.Content className="select-content">
-        <RadixSelect.Viewport>
-          {options.map((opt) => (
-            <RadixSelect.Item
-              key={opt.value}
-              value={opt.value}
-              className="select-item"
+      {isClick && (
+        <div className="selectDropDown">
+          {options.map((item, index) => (
+            <div
+              key={index}
+              onClick={() => {
+                action(item);
+                setIsClick(false);
+              }}
             >
-              <RadixSelect.ItemText>{opt.label}</RadixSelect.ItemText>
-              <RadixSelect.ItemIndicator>
-                <CheckIcon />
-              </RadixSelect.ItemIndicator>
-            </RadixSelect.Item>
+              {item}
+            </div>
           ))}
-        </RadixSelect.Viewport>
-      </RadixSelect.Content>
-    </RadixSelect.Root>
+        </div>
+      )}
+    </div>
   );
 }
+
+export default Select;
