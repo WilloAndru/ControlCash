@@ -27,7 +27,7 @@ const Configuration = forwardRef<HTMLDivElement, ConfigurationProps>(
 
             {/* Selects */}
             <main>
-              <div className="divSelect">
+              <div className="options divSelect">
                 <h4>Theme</h4>
                 <Select
                   title={themeColor}

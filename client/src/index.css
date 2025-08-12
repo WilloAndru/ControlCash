@@ -153,10 +153,16 @@ input {
         flex-direction: column;
         gap: 1rem;
 
-        div {
+        .options {
           display: flex;
           flex-direction: column;
           gap: 0.5rem;
+        }
+
+        .divSelect {
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
         }
       }
 

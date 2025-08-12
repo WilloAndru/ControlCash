@@ -73,7 +73,7 @@ const Profile = forwardRef<HTMLDivElement, ProfileProps>(
             {/* Inputs */}
             <main>
               {listDatas.map((item, index) => (
-                <div key={index}>
+                <div key={index} className="options">
                   <h4>{item.title}</h4>
                   <input
                     type="text"
