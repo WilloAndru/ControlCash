@@ -6,8 +6,8 @@ function Footer() {
   return (
     <footer className="footer">
       {/* Seccion del eslogan */}
-      <Brand />
       <section className="brandSection">
+        <Brand />
         <p className="textGray">Control your finances, build your home.</p>
       </section>
       {/* Seccion de Links */}

@@ -5,6 +5,16 @@
     <link rel="icon" type="image/svg+xml" href="/icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ControlCash</title>
+    
+    <!-- Necesario para que el themColor se active al actualizar pagina -->
+    <script>
+      const savedTheme = localStorage.getItem("themeColor") || "White";
+      if (savedTheme === "Black") {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -8,14 +8,15 @@ interface ConfigurationProps {
 
 const Configuration = forwardRef<HTMLDivElement, ConfigurationProps>(
   ({ setIsShow }, ref) => {
-    const [darkMode, setDarkMode] = useState(() => {
-      const savedTheme = localStorage.getItem("themeColor");
-      return savedTheme === "Black";
-    });
+    // Estado del color del tema
+    const [darkMode, setDarkMode] = useState(
+      localStorage.getItem("themeColor") === "Black"
+    );
 
+    // Cambia la clase del root para aplicar estilos
     useEffect(() => {
       const className = "dark";
-      const element = document.documentElement; // <html>
+      const element = document.documentElement;
 
       if (darkMode) {
         element.classList.add(className);
@@ -24,6 +25,7 @@ const Configuration = forwardRef<HTMLDivElement, ConfigurationProps>(
       }
     }, [darkMode]);
 
+    // Funcion que cambia el tema
     const handleThemeChange = (value: string) => {
       setDarkMode(value === "Black");
       localStorage.setItem("themeColor", value);
@@ -33,6 +35,7 @@ const Configuration = forwardRef<HTMLDivElement, ConfigurationProps>(
       <div className="pageDropdown">
         <section ref={ref}>
           <div className="container">
+            {/* Boton de cierre */}
             <button
               onClick={() => setIsShow(false)}
               className="closeBtn"
