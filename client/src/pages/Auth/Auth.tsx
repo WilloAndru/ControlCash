@@ -5,6 +5,7 @@ import { auth, provider } from "../../firebase/firebase";
 import { FcGoogle } from "react-icons/fc";
 import axios from "axios";
 import "./Auth.css";
+import Brand from "../../components/Brand/Brand";
 
 const baseURL = import.meta.env.VITE_API_URL;
 
@@ -52,10 +53,7 @@ function Auth() {
       {/* Formulario Auth */}
       <section>
         {/* Link de marca */}
-        <Link to="/" className="brand">
-          <img src="icon.png" alt="Icon" />
-          <h3>ControlCash</h3>
-        </Link>
+        <Brand />
 
         {/* Div que va en el centro */}
         <div className="centerDiv">

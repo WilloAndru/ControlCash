@@ -1,15 +1,13 @@
 import { Link } from "react-router-dom";
 import "./Footer.css";
+import Brand from "../Brand/Brand";
 
 function Footer() {
   return (
     <footer className="footer">
       {/* Seccion del eslogan */}
+      <Brand />
       <section className="brandSection">
-        <div className="brand">
-          <img src="icon.png" alt="Icon" />
-          <h3>ControlCash</h3>
-        </div>
         <p className="textGray">Control your finances, build your home.</p>
       </section>
       {/* Seccion de Links */}

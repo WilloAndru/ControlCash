@@ -4,6 +4,7 @@ import UserDropdown from "./UserDropdown";
 import { useRef, useState, useEffect } from "react";
 import Profile from "../../pages/PagesDropdown/Profile";
 import Configuration from "../../pages/PagesDropdown/Configuration";
+import Brand from "../Brand/Brand";
 
 function Header() {
   const stored = localStorage.getItem("userData");
@@ -67,10 +68,7 @@ function Header() {
   return (
     <header className="header">
       {/* Seccion de marca */}
-      <Link to="/" className="brand">
-        <img src="icon.png" alt="Icon" />
-        <h3>ControlCash</h3>
-      </Link>
+      <Brand />
 
       {/* Seccion de opciones */}
       {userData && (

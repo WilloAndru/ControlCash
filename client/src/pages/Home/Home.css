@@ -21,8 +21,8 @@
 
   .photoSection {
     position: relative;
-    background-color: white;
-    padding: 0.5rem;
+    background-color: var(--color-white);
+    padding: 0.4rem;
     border-radius: 1rem;
 
     button {
@@ -34,12 +34,18 @@
       padding: 0;
       position: absolute;
       z-index: 1;
-      color: white;
       bottom: 2rem;
-    }
-    button:hover {
-      background-color: white;
-      color: black;
+
+      * {
+        color: white;
+      }
+
+      &:hover {
+        background-color: white;
+        * {
+          color: black;
+        }
+      }
     }
 
     .left {

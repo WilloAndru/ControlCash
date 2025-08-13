@@ -30,15 +30,17 @@
       button {
         display: flex;
         gap: 0.5rem;
-        border: 1px solid gray;
+        border: 1px solid var(--color-gray);
+        background-color: var(--color-bg);
 
         .iconGoogle {
           font-size: 1.1rem;
         }
-      }
-      button:hover {
-        background-color: var(--color-black);
-        color: white;
+
+        &:hover {
+          background-color: var(--color-black);
+          color: var(--color-white);
+        }
       }
     }
   }

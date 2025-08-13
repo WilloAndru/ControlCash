@@ -1,5 +1,5 @@
 .userDropdown {
-  background-color: white;
+  background-color: var(--color-white);
   width: 5rem;
   position: absolute;
   border-radius: 1rem;
@@ -27,8 +27,9 @@
     .icon {
       font-size: 1.2rem;
     }
-  }
-  button:hover {
-    background-color: var(--color-bg);
+
+    &:hover {
+      background-color: var(--color-bg);
+    }
   }
 }

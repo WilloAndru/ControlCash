@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   background-color: var(--color-bg);
-  border-bottom: 2px solid gainsboro;
+  border-bottom: 2px solid var(--color-bg-hover);
   padding: 0.5rem;
   height: 5rem;
 
@@ -21,6 +21,7 @@
       border-radius: 1rem;
       padding: 0.5rem 1rem;
       border: none;
+      background-color: transparent;
 
       .avatarText {
         p {
@@ -39,7 +40,7 @@
         justify-content: center;
         width: 2.5rem;
         height: 2.5rem;
-        border: 1px solid black;
+        border: 1px solid var(--color-black);
         border-radius: 50%;
         overflow: hidden;
 
@@ -47,9 +48,10 @@
           width: 100%;
         }
       }
-    }
-    .profile:hover {
-      background-color: gainsboro;
+
+      &:hover {
+        background-color: var(--color-bg-hover);
+      }
     }
   }
 }

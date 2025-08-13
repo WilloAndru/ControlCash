@@ -5,21 +5,23 @@
     font-size: 1rem;
     border-radius: 0.5rem;
     position: relative;
+    background-color: transparent;
     gap: 0.5rem;
 
     &:hover {
-      background-color: gainsboro;
+      background-color: var(--color-bg-hover);
     }
   }
 
   .selectDropDown {
     position: fixed;
-    background-color: whitesmoke;
+    background-color: var(--color-bg);
     padding: 0.4rem;
     border-radius: 0.5rem;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 2px 4px black;
 
     button {
+      width: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -28,7 +30,7 @@
       gap: 0.5rem;
 
       &:hover {
-        background-color: white;
+        background-color: var(--color-white);
       }
     }
   }

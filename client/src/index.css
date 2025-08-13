@@ -4,15 +4,25 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  color: var(--color-text);
+  color: var(--color-black);
   font-family: "Montserrat", sans-serif;
 }
 
 :root {
+  --color-white: white;
   --color-bg: #f0f0f0;
+  --color-bg-hover: gainsboro;
+  --color-black: #202020;
+  --color-black-hover: #3d3d3d;
   --color-gray: gray;
-  --color-black: #1e293b;
-  --color-black-hover: #4a5569;
+}
+
+.dark {
+  --color-white: #121212;
+  --color-bg: #303030;
+  --color-bg-hover: #565656;
+  --color-black: #e0e0e0;
+  --color-black-hover: #c0c0c0;
 }
 
 a {
@@ -28,33 +38,22 @@ button {
   justify-content: center;
   padding: 0.5rem 1rem;
   cursor: pointer;
-  border: 1px solid rgb(180, 180, 180);
+  border: 1px solid var(--color-bg-hover);
 
   &:disabled {
     background-color: #ccc;
+    color: white;
     cursor: not-allowed;
-  }
 
-  &:disabled:hover {
-    background-color: #ccc;
-  }
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  width: fit-content;
-
-  img {
-    width: 2rem;
+    &:hover {
+      background-color: #ccc;
+    }
   }
 }
 
 .styleBtnBlack {
   background-color: var(--color-black);
-  color: white;
+  color: var(--color-white);
 
   &:hover {
     background-color: var(--color-black-hover);
@@ -62,10 +61,10 @@ button {
 }
 
 .styleBtnWhite {
-  background-color: white;
+  background-color: var(--color-white);
 
   &:hover {
-    background-color: whitesmoke;
+    background-color: var(--color-bg);
   }
 }
 
@@ -77,15 +76,22 @@ button {
   padding: 0.5rem;
   font-size: 1.5rem;
   border-radius: 50%;
+  background-color: transparent;
 
   &:hover {
-    background-color: gainsboro;
+    background-color: var(--color-bg-hover);
+  }
+}
+
+.optionLink {
+  &:hover {
+    color: var(--color-black-hover);
   }
 }
 
 /* Textos */
 .textGray {
-  color: gray;
+  color: var(--color-gray);
 }
 
 .errorMessage {
@@ -99,7 +105,7 @@ button {
 input {
   padding: 0.5rem 0.8rem;
   border-radius: 0.5rem;
-  border: 1px solid rgb(180, 180, 193);
+  border: 1px solid var(--color-bg-hover);
   background-color: transparent;
 
   &:focus {
@@ -123,7 +129,7 @@ input {
   z-index: 2;
 
   section {
-    background: white;
+    background: var(--color-white);
     min-width: 360px;
     max-width: 500px;
     width: 40vw;
