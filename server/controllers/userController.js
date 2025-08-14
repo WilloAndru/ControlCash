@@ -12,6 +12,7 @@ export const authGoogle = async (req, res) => {
 
     let user = await UserModel.findOne({ where: { uid: uid } });
 
+    // Creamos usuario
     if (!user) {
       user = await UserModel.create({
         uid,
@@ -24,6 +25,12 @@ export const authGoogle = async (req, res) => {
         planType: "free",
         plantExpirationDate: null,
       });
+    }
+    // Modificamos localizacion de usuario existente si se cambio de ip
+    else {
+      if (user.country !== country || user.city !== city) {
+        await user.update({ country, city });
+      }
     }
 
     res.status(200).json({ user });

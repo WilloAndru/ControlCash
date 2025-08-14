@@ -17,17 +17,13 @@ export default async function getLocation(req) {
 
   try {
     // Obtengo la IP del usuario
-    const geoRes = await fetch(`https://ipwhois.app/json/${ip}`);
+    const geoRes = await fetch(`http://ip-api.com/json/${ip}`);
     const geoData = await geoRes.json();
 
-    if (geoData.success === false) {
-      console.error("Error en API ipwhois:", geoData.message);
-    }
-
-    const country = geoData.country;
-    const city = geoData.city;
-
-    return { country, city };
+    return {
+      country: geoData.country_name,
+      city: geoData.city,
+    };
   } catch (error) {
     console.error("Error obteniendo ubicación:", error);
   }
