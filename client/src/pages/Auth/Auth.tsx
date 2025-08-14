@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../../firebase/firebase";
 import { FcGoogle } from "react-icons/fc";
@@ -29,6 +29,9 @@ function Auth() {
           name: response.data.user.name,
           email: response.data.user.email,
           avatar: response.data.user.avatar,
+          country: response.data.user.country,
+          city: response.data.user.city,
+          income: response.data.user.income,
           planType: response.data.user.planType,
           planExpirationDate: response.data.user.planExpirationDate,
         };

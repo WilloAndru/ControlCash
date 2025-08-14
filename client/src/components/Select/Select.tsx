@@ -10,16 +10,18 @@ interface SelectProps {
 }
 
 function Select({ title, options, action }: SelectProps) {
-  const [isClick, setIsClick] = useState(false);
-  const [selected, setSelected] = useState(title);
+  const [isClick, setIsClick] = useState(false); //El select fue seleccionado?
+  const [selected, setSelected] = useState(title); //Que opcion fue seleccionada
 
   return (
     <div className="select">
+      {/* Select por defecto */}
       <button onClick={() => setIsClick(!isClick)}>
         <p>{selected}</p>
         <IoIosArrowDown />
       </button>
 
+      {/* Opciones del select */}
       {isClick && (
         <div className="selectDropDown">
           {options.map((item, index) => (

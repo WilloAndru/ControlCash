@@ -82,7 +82,7 @@ function Header() {
       {/* Seccion derecha */}
       {!userData ? (
         //Seccion de autenticacion
-        <Link to="/auth" className="authLink btn">
+        <Link to="/auth" className="styleBtnBlack btn">
           Get started
         </Link>
       ) : (

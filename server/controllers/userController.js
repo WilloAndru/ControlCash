@@ -1,5 +1,6 @@
 import admin from "../firebase/firebase.js";
 import { UserModel } from "../models/userModel.js";
+import getLocation from "../utils/getLocation.js";
 
 export const authGoogle = async (req, res) => {
   const { token } = req.body;
@@ -7,6 +8,7 @@ export const authGoogle = async (req, res) => {
   try {
     const decodedToken = await admin.auth().verifyIdToken(token);
     const { email, name, picture, uid } = decodedToken;
+    const { country, city } = await getLocation(req);
 
     let user = await UserModel.findOne({ where: { uid: uid } });
 
@@ -16,6 +18,9 @@ export const authGoogle = async (req, res) => {
         name,
         email,
         avatar: picture,
+        country: country,
+        city: city,
+        income: null,
         planType: "free",
         plantExpirationDate: null,
       });

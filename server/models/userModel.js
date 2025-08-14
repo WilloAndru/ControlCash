@@ -7,6 +7,8 @@ export const UserModel = db.define("users", {
   email: { type: DataTypes.STRING },
   name: { type: DataTypes.STRING },
   avatar: { type: DataTypes.STRING },
+  country: { type: DataTypes.STRING },
+  city: { type: DataTypes.STRING },
   planType: {
     type: DataTypes.ENUM("free", "premium"),
     defaultValue: "free",
