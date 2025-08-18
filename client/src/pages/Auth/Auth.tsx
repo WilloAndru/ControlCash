@@ -7,7 +7,7 @@ import axios from "axios";
 import "./Auth.css";
 import Brand from "../../components/Brand/Brand";
 
-const baseURL = import.meta.env.VITE_API_URL;
+const URL = import.meta.env.VITE_API_URL;
 
 function Auth() {
   const [error, setError] = useState("");
@@ -21,7 +21,7 @@ function Auth() {
       // Obtiene el token de autenticación del usuario
       const token = await result.user.getIdToken();
       // Envía el token al backend para validación e inicio de sesión
-      const response = await axios.post(`${baseURL}/google`, { token });
+      const response = await axios.post(`${URL}/google`, { token });
       // Guarda los datos de usuario en el localstorage y redirigue al home
       if (response.status === 200) {
         const userData = {

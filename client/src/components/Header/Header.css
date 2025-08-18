@@ -4,7 +4,6 @@
   background-color: var(--color-bg);
   border-bottom: 2px solid var(--color-bg-hover);
   padding: 0.5rem;
-  height: 5rem;
 
   section {
     display: flex;
