@@ -36,7 +36,7 @@ function PlanCost() {
                 <h5>{item.title}</h5>
                 <div className="cost-div">
                   <h1>${item.price}</h1>
-                  <p className="textGray">per {item.duration}</p>
+                  <p className="textGray">per 1 month</p>
                 </div>
                 <button>Get Started</button>
               </div>

@@ -39,7 +39,7 @@ const UserDropdown = forwardRef<HTMLDivElement, UserDropdownProps>(
           planType === "free"
             ? "Switch to higher plan"
             : `You have ${getDaysRemaining(planExpirationDate)} days left`,
-        onClick: () => navigate("/planCost"),
+        onClick: () => navigate("/viewPlans"),
       },
       //Configuracion general
       {

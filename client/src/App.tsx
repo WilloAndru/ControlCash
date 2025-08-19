@@ -17,7 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/auth" element={<Auth />} />
-          <Route path="/planCost" element={<PlanCost />} />
+          <Route path="/viewPlans" element={<PlanCost />} />
         </Routes>
         {!hideLayout && <Footer />}
       </div>
