@@ -22,7 +22,7 @@ export const authGoogle = async (req, res) => {
         country: country,
         city: city,
         income: null,
-        planType: "free",
+        planId: 1,
         plantExpirationDate: null,
       });
     }

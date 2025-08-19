@@ -32,7 +32,7 @@ function Auth() {
           country: response.data.user.country,
           city: response.data.user.city,
           income: response.data.user.income,
-          planType: response.data.user.planType,
+          planId: response.data.user.planId,
           planExpirationDate: response.data.user.planExpirationDate,
         };
         localStorage.setItem("userData", JSON.stringify(userData));

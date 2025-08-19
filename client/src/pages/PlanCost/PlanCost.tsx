@@ -10,9 +10,10 @@ function PlanCost() {
   useEffect(() => {
     const fetchPlans = async () => {
       try {
-        const response = await axios.get(`${URL}/getPlansData`);
+        const response = await axios.get(`${URL}/getPlans`);
         if (response.status === 200) {
           setDataPlans(response.data);
+          console.log(response.data);
         }
       } catch (error) {
         console.error(error);
@@ -33,10 +34,10 @@ function PlanCost() {
             <section key={index} className="plan">
               {/* Div con titulo y precio */}
               <div className="sup-div">
-                <h5>{item.title}</h5>
+                <h5>{item.name}</h5>
                 <div className="cost-div">
                   <h1>${item.price}</h1>
-                  <p className="textGray">per 1 month</p>
+                  <p className="textGray">{item.duration} per month</p>
                 </div>
                 <button>Get Started</button>
               </div>
@@ -47,7 +48,7 @@ function PlanCost() {
                   <p className="textGray">Everything in our free plan plus</p>
                 </div>
                 <ul>
-                  {item.features?.map((f: string, i: number) => (
+                  {JSON.parse(item.features).map((f: string, i: number) => (
                     <li key={i}>{f}</li>
                   ))}
                 </ul>

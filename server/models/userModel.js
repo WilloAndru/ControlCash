@@ -9,10 +9,15 @@ export const UserModel = db.define("users", {
   avatar: { type: DataTypes.STRING },
   country: { type: DataTypes.STRING },
   city: { type: DataTypes.STRING },
-  planType: {
-    type: DataTypes.ENUM("free", "premium"),
-    defaultValue: "free",
+  income: { type: DataTypes.STRING, allowNull: true },
+  planId: {
+    type: DataTypes.INTEGER,
     allowNull: false,
+    defaultValue: 1,
+    references: {
+      model: "plans",
+      key: "id",
+    },
   },
   planExpirationDate: { type: DataTypes.DATE, allowNull: true },
 });

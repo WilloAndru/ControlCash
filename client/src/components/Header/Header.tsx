@@ -92,7 +92,7 @@ function Header() {
             {/* Contenedor con texto */}
             <div className="avatarText">
               <p>{userData.name.split(" ")[0]}</p>
-              <p className="paymentPlan textGray">{userData.planType}</p>
+              <p className="paymentPlan textGray">{userData.planId}</p>
             </div>
 
             {/* Avatar */}
