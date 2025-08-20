@@ -1,0 +1,65 @@
+.plan-cost {
+  margin: 4rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+
+  .plans-section {
+    display: flex;
+    gap: 1rem;
+
+    .plan {
+      border-radius: 1rem;
+      background-color: var(--color-bg-hover);
+
+      .sup-section {
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        border-bottom: 2px solid var(--color-gray);
+
+        .cost-div {
+          display: flex;
+          align-items: center;
+          gap: 0.3rem;
+        }
+      }
+
+      .features-section {
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        .sup-div {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+
+        ul {
+          padding-left: 1rem;
+          display: flex;
+          flex-direction: column;
+          gap: 0.2rem;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .plans-section {
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+
+    .plan {
+      max-width: 500px;
+      width: 100%;
+    }
+  }
+}
