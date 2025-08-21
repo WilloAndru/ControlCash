@@ -14,7 +14,7 @@
       padding: 0;
     }
 
-    .centerDiv {
+    .center-div {
       text-align: center;
       display: flex;
       flex-direction: column;
@@ -33,7 +33,7 @@
         border: 1px solid var(--color-gray);
         background-color: var(--color-bg);
 
-        .iconGoogle {
+        .icon-google {
           font-size: 1.1rem;
         }
 
@@ -45,7 +45,7 @@
     }
   }
 
-  .imgRight {
+  .img-right {
     object-fit: cover;
     min-height: 100%;
     width: 50%;
@@ -67,7 +67,7 @@
       }
     }
 
-    .imgRight {
+    .img-right {
       min-width: 100%;
     }
   }

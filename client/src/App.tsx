@@ -11,8 +11,8 @@ function App() {
   const hideLayout = location.pathname === "/auth"; // ocultar header y footer en auth
 
   return (
-    <div className="appContainer">
-      <div className="appContent">
+    <div className="app-container">
+      <div className="app-content">
         {!hideLayout && <Header />}
         <Routes>
           <Route path="/" element={<Home />} />

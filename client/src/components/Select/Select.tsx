@@ -23,7 +23,7 @@ function Select({ title, options, action }: SelectProps) {
 
       {/* Opciones del select */}
       {isClick && (
-        <div className="selectDropDown">
+        <div className="select-drop-down">
           {options.map((item, index) => (
             <button
               key={index}

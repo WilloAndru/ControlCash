@@ -51,7 +51,7 @@ button {
   }
 }
 
-.styleBtnBlack {
+.style-btn-black {
   background-color: var(--color-black);
   color: var(--color-white);
 
@@ -60,7 +60,7 @@ button {
   }
 }
 
-.styleBtnWhite {
+.style-btn-white {
   background-color: var(--color-white);
 
   &:hover {
@@ -68,7 +68,7 @@ button {
   }
 }
 
-.closeBtn {
+.close-btn {
   border: none;
   position: absolute;
   top: 0;
@@ -83,18 +83,18 @@ button {
   }
 }
 
-.optionLink {
+.option-link {
   &:hover {
     color: var(--color-black-hover);
   }
 }
 
 /* Textos */
-.textGray {
+.text-gray {
   color: var(--color-gray);
 }
 
-.errorMessage {
+.error-msg {
   background-color: red;
   color: white;
   padding: 0.5rem;
@@ -114,7 +114,7 @@ input {
 }
 
 /* Interfaces */
-.pageDropdown {
+.page-dropdown {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -148,7 +148,7 @@ input {
       width: 100%;
       position: relative;
 
-      .headerpageDropdown {
+      .headerpage-dropdown {
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
@@ -172,7 +172,7 @@ input {
         }
       }
 
-      .footerpageDropdown {
+      .footerpage-dropdown {
         display: flex;
         gap: 1rem;
         justify-content: end;

@@ -32,13 +32,13 @@ const Configuration = forwardRef<HTMLDivElement, ConfigurationProps>(
     };
 
     return (
-      <div className="pageDropdown">
+      <div className="page-dropdown">
         <section ref={ref}>
           <div className="container">
             {/* Boton de cierre */}
             <button
               onClick={() => setIsShow(false)}
-              className="closeBtn"
+              className="close-btn"
               type="button"
             >
               <IoClose />

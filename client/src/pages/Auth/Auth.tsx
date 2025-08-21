@@ -36,6 +36,14 @@ function Auth() {
           planExpirationDate: response.data.user.planExpirationDate,
         };
         localStorage.setItem("userData", JSON.stringify(userData));
+        const planData = {
+          id: response.data.plan.id,
+          name: response.data.plan.name,
+          price: response.data.plan.price,
+          duration: response.data.plan.duration,
+          paymentProviderId: response.data.plan.paymentProviderId,
+        };
+        localStorage.setItem("planData", JSON.stringify(planData));
         navigate("/");
       } else {
         setError("Server authentication failed.");
@@ -59,30 +67,30 @@ function Auth() {
         <Brand />
 
         {/* Div que va en el centro */}
-        <div className="centerDiv">
+        <div className="center-div">
           {/* Error */}
-          {error && <p className="errorMessage">{error}</p>}
+          {error && <p className="error-msg">{error}</p>}
           {/* Div de bienvenida */}
           <div>
             <h1>Welcome</h1>
-            <p className="textGray">
+            <p className="text-gray">
               Sign up or log in with your Google account.
             </p>
           </div>
           {/* Boton de google */}
           <button onClick={authWithGoogle}>
-            <FcGoogle className="iconGoogle" />
+            <FcGoogle className="icon-google" />
             Login with Google
           </button>
         </div>
 
         {/* Terminos */}
-        <p className="textGray terms">
+        <p className="text-gray terms">
           By signing up, you agree to our Terms of Service and Privacy Policy.
         </p>
       </section>
       {/* Imagen Derecha */}
-      <img className="imgRight" src="imgHome1.jpg" alt="Image Auth" />
+      <img className="img-right" src="imgHome1.jpg" alt="Image Auth" />
     </main>
   );
 }

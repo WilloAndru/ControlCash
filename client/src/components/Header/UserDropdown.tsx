@@ -36,7 +36,7 @@ const UserDropdown = forwardRef<HTMLDivElement, UserDropdownProps>(
       {
         icon: <GrDiamond className="icon" />,
         text:
-          planType === "free"
+          planType === "Free"
             ? "Switch to higher plan"
             : `You have ${getDaysRemaining(planExpirationDate)} days left`,
         onClick: () => navigate("/viewPlans"),
@@ -59,7 +59,7 @@ const UserDropdown = forwardRef<HTMLDivElement, UserDropdownProps>(
     ];
 
     return (
-      <section ref={ref} className="userDropdown">
+      <section ref={ref} className="user-drop-down">
         {/* Lista de opciones de usuario */}
         {itemsList.map((item, index) => (
           <button key={index} onClick={item.onClick}>

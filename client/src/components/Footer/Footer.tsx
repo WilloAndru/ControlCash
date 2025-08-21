@@ -6,39 +6,39 @@ function Footer() {
   return (
     <footer className="footer">
       {/* Seccion del eslogan */}
-      <section className="brandSection">
+      <section className="brand-section">
         <Brand />
-        <p className="textGray">Control your finances, build your home.</p>
+        <p className="text-gray">Control your finances, build your home.</p>
       </section>
       {/* Seccion de Links */}
-      <section className="linkSection">
+      <section className="link-section">
         <div>
-          <p className="textGray">APP</p>
-          <Link to="/" className="optionLink">
+          <p className="text-gray">APP</p>
+          <Link to="/" className="option-link">
             Web
           </Link>
-          <Link to="/" className="optionLink">
+          <Link to="/" className="option-link">
             Explore
           </Link>
         </div>
         <div>
-          <p className="textGray">NEED A HELP?</p>
-          <Link to="/" className="optionLink">
+          <p className="text-gray">NEED A HELP?</p>
+          <Link to="/" className="option-link">
             Contact us
           </Link>
-          <Link to="/" className="optionLink">
+          <Link to="/" className="option-link">
             Blog
           </Link>
         </div>
         <div>
-          <p className="textGray">COMMUNITY</p>
-          <Link to="/" className="optionLink">
+          <p className="text-gray">COMMUNITY</p>
+          <Link to="/" className="option-link">
             X
           </Link>
-          <Link to="/" className="optionLink">
+          <Link to="/" className="option-link">
             Linkedin
           </Link>
-          <Link to="/" className="optionLink">
+          <Link to="/" className="option-link">
             Instagram
           </Link>
         </div>

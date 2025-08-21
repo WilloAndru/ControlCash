@@ -37,9 +37,12 @@ function PlanCost() {
                 <h2>{item.name}</h2>
                 <div className="cost-div">
                   <h2>${item.price}</h2>
-                  <p>per {item.duration} month</p>
+                  <p>
+                    per {item.duration}{" "}
+                    {item.duration === 1 ? "month" : "months"}
+                  </p>
                 </div>
-                <button>Get Started</button>
+                <button className="style-btn-black">Get Started</button>
               </section>
               {/* Div de caracteristicas */}
               <section className="features-section">

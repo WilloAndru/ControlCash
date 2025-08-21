@@ -7,7 +7,7 @@
   border-top: 2px solid var(--color-bg-hover);
   padding: 1rem 1.5rem;
 
-  .brandSection {
+  .brand-section {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -17,7 +17,7 @@
     }
   }
 
-  .linkSection {
+  .link-section {
     display: flex;
     gap: 2rem;
 
@@ -32,7 +32,7 @@
 @media (max-width: 768px) {
   footer {
     justify-content: center;
-    .brandSection {
+    .brand-section {
       img {
         display: none;
       }

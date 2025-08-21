@@ -1,14 +1,16 @@
 import "./Header.css";
 import { Link } from "react-router-dom";
-import UserDropdown from "./UserDropdown";
 import { useRef, useState, useEffect } from "react";
 import Profile from "../../pages/PagesDropdown/Profile";
 import Configuration from "../../pages/PagesDropdown/Configuration";
 import Brand from "../Brand/Brand";
+import UserDropdown from "./UserDropdown";
 
 function Header() {
-  const stored = localStorage.getItem("userData");
-  const userData = stored ? JSON.parse(stored) : null;
+  const storedUser = localStorage.getItem("userData");
+  const userData = storedUser ? JSON.parse(storedUser) : null;
+  const storedPlan = localStorage.getItem("planData");
+  const planData = storedPlan ? JSON.parse(storedPlan) : null;
 
   //Logica de div desplegable
   const [isMenu, setIsMenu] = useState(false);
@@ -73,7 +75,7 @@ function Header() {
       {/* Seccion de opciones */}
       {userData && (
         <section>
-          <Link to="/proyection" className="optionLink">
+          <Link to="/proyection" className="option-link">
             Proyection
           </Link>
         </section>
@@ -82,30 +84,30 @@ function Header() {
       {/* Seccion derecha */}
       {!userData ? (
         //Seccion de autenticacion
-        <Link to="/auth" className="styleBtnBlack btn">
+        <Link to="/auth" className="style-btn-black btn">
           Get started
         </Link>
       ) : (
         //Seccion de perfil
-        <section ref={menuRef} className="profileSection">
+        <section ref={menuRef} className="profile-section">
           <button className="profile">
             {/* Contenedor con texto */}
-            <div className="avatarText">
+            <div className="avatar-text">
               <p>{userData.name.split(" ")[0]}</p>
-              <p className="paymentPlan textGray">{userData.planId}</p>
+              <p className="payment-plan text-gray">{planData.name}</p>
             </div>
 
             {/* Avatar */}
-            <div className="avatarImg">
+            <div className="avatar-img">
               <img src={userData.avatar} alt="User Image" />
             </div>
           </button>
 
-          {/* Dropdown que aparece al hacer hover */}
+          {/* Dropdown que aparece al hacer dar click */}
           {isMenu && (
             <UserDropdown
               email={userData.email}
-              planType={userData.planType}
+              planType={planData.name}
               planExpirationDate={userData.planExpirationDate}
               ref={dropdownRef}
               setIsProfile={setIsProfile}

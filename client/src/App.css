@@ -1,8 +1,8 @@
-.appContainer {
+.app-container {
   background-color: var(--color-white);
   padding: 1vh;
 
-  .appContent {
+  .app-content {
     border-radius: 1rem;
     overflow: hidden;
     display: flex;

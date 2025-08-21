@@ -13,7 +13,7 @@
     }
   }
 
-  .selectDropDown {
+  .select-drop-down {
     position: fixed;
     background-color: var(--color-bg);
     padding: 0.4rem;

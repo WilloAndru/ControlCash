@@ -31,33 +31,33 @@ function Home() {
   return (
     <main className="home">
       {/* Seccion de introduccion textual */}
-      <section className="textSection">
-        <p className="textGray">Optimize your finances</p>
+      <section className="text-section">
+        <p className="text-gray">Optimize your finances</p>
 
         <h1>
           Calculate your future home costs based on your income and plan ahead
           easily
         </h1>
 
-        <p className="textGray">
+        <p className="text-gray">
           With our innovative platform, you can plan, save, and track through
           statistics how soon you can purchase your own home.
         </p>
 
         <div>
-          <Link to="/viewPlans" className="styleBtnWhite btn">
+          <Link to="/viewPlans" className="style-btn-white btn">
             View plans
           </Link>
-          <Link to="/auth" className="styleBtnBlack btn">
+          <Link to="/auth" className="style-btn-black btn">
             Get started
           </Link>
         </div>
       </section>
 
       {/* Seccion de fotos */}
-      <section className="photoSection">
+      <section className="photo-section">
         {/* Indicadores */}
-        <div className="indicatorContainer">{indicators}</div>
+        <div className="indicator-container">{indicators}</div>
 
         {/* Botones */}
         <button className="left" onClick={prevImage}>

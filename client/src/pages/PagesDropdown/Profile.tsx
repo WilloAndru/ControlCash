@@ -53,18 +53,18 @@ const Profile = forwardRef<HTMLDivElement, ProfileProps>(
     };
 
     return (
-      <div className="pageDropdown">
+      <div className="page-dropdown">
         <section ref={ref}>
           <form className="container" onSubmit={saveDatas}>
             <button
               onClick={() => setIsShow(false)}
-              className="closeBtn"
+              className="close-btn"
               type="button"
             >
               <IoClose />
             </button>
             {/* Header */}
-            <header className="headerpageDropdown">
+            <header className="headerpage-dropdown">
               <h2>Custom your profile</h2>
               <p>
                 Edit your information to get more accurate estimates and costs.
@@ -84,17 +84,17 @@ const Profile = forwardRef<HTMLDivElement, ProfileProps>(
               ))}
             </main>
             {/* Parte de guardado del form */}
-            <footer className="footerpageDropdown">
+            <footer className="footerpage-dropdown">
               <button
                 onClick={() => setIsShow(false)}
                 type="button"
-                className="styleBtnWhite"
+                className="style-btn-white"
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="styleBtnBlack"
+                className="style-btn-black"
                 disabled={!hasChanges}
               >
                 Save

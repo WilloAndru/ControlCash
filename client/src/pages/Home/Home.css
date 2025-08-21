@@ -6,7 +6,7 @@
   align-items: center;
   gap: 2rem;
 
-  .textSection {
+  .text-section {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -19,7 +19,7 @@
     }
   }
 
-  .photoSection {
+  .photo-section {
     position: relative;
     background-color: var(--color-white);
     padding: 0.4rem;
@@ -56,7 +56,7 @@
       left: 5rem;
     }
 
-    .indicatorContainer {
+    .indicator-container {
       display: flex;
       gap: 0.5rem;
       position: absolute;

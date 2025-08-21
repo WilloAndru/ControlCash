@@ -1,4 +1,5 @@
 import admin from "../firebase/firebase.js";
+import { PlanModel } from "../models/planModel.js";
 import { UserModel } from "../models/userModel.js";
 import getLocation from "../utils/getLocation.js";
 
@@ -33,7 +34,10 @@ export const authGoogle = async (req, res) => {
       }
     }
 
-    res.status(200).json({ user });
+    // Enviamos los datos del plan de pago
+    const plan = await PlanModel.findOne({ where: { id: user.planId } });
+
+    res.status(200).json({ user, plan });
   } catch (error) {
     console.error("Error", error);
     res.status(401).json({ message: "Invalid Token" });

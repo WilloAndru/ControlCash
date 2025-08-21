@@ -10,7 +10,7 @@
     align-items: center;
   }
 
-  .profileSection {
+  .profile-section {
     position: relative;
 
     .profile {
@@ -22,18 +22,18 @@
       border: none;
       background-color: transparent;
 
-      .avatarText {
+      .avatar-text {
         p {
           font-size: 1rem;
           text-align: end;
         }
 
-        .paymentPlan {
+        .payment-plan {
           font-size: 0.8rem;
         }
       }
 
-      .avatarImg {
+      .avatar-img {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -65,7 +65,7 @@
 
 @media (max-width: 480px) {
   .profile {
-    .avatarText {
+    .avatar-text {
       display: none;
     }
   }
