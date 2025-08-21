@@ -1,24 +1,25 @@
 .plan-cost {
-  margin: 4rem 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 3rem;
+  gap: 2rem;
+  margin: 3rem 5vw;
 
   .plans-section {
     display: flex;
-    gap: 1rem;
+    gap: 2rem;
 
     .plan {
       border-radius: 1rem;
       background-color: var(--color-white);
+      max-width: 350px;
 
       .sup-section {
-        padding: 1rem;
+        padding: 1.5rem;
         display: flex;
         flex-direction: column;
-        gap: 0.5rem;
+        gap: 1rem;
         border-bottom: 2px solid var(--color-gray);
 
         .cost-div {
@@ -29,22 +30,32 @@
       }
 
       .features-section {
-        padding: 1rem;
+        padding: 1.5rem;
         display: flex;
         flex-direction: column;
-        gap: 0.5rem;
+        gap: 1rem;
 
         .sup-div {
           display: flex;
           flex-direction: column;
-          gap: 0.5rem;
+          gap: 1rem;
         }
 
         ul {
-          padding-left: 1rem;
           display: flex;
           flex-direction: column;
-          gap: 0.2rem;
+          gap: 0.5rem;
+          list-style-type: none;
+
+          li {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+
+            .icon {
+              font-size: 1.2rem;
+            }
+          }
         }
       }
     }
@@ -58,7 +69,7 @@
     align-items: center;
 
     .plan {
-      max-width: 500px;
+      max-width: 400px;
       width: 100%;
     }
   }

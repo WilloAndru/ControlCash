@@ -1,11 +1,21 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import "./PlanCost.css";
+import "./ViewPlans.css";
+import { FaVial } from "react-icons/fa";
+import { FaRegFileExcel } from "react-icons/fa";
+import { AiOutlineDollarCircle } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 const URL = import.meta.env.VITE_API_URL;
 
-function PlanCost() {
+function ViewPlans() {
   const [dataPlans, setDataPlans] = useState<any[]>([]);
+
+  const listIconsFeatures = [
+    <FaVial className="icon" />,
+    <FaRegFileExcel className="icon" />,
+    <AiOutlineDollarCircle className="icon" />,
+  ];
 
   //Obtiene los datos de los planes del servidor
   useEffect(() => {
@@ -42,17 +52,25 @@ function PlanCost() {
                     {item.duration === 1 ? "month" : "months"}
                   </p>
                 </div>
-                <button className="style-btn-black">Get Started</button>
+                <Link
+                  to={`/payPlan/${item.name}`}
+                  className="style-btn-black btn"
+                >
+                  Get Started
+                </Link>
               </section>
               {/* Div de caracteristicas */}
               <section className="features-section">
                 <div className="sup-div">
                   <h3>FEATURES</h3>
-                  <p>Everything in our free plan plus</p>
+                  <p>{item.description}</p>
                 </div>
                 <ul>
                   {JSON.parse(item.features).map((f: string, i: number) => (
-                    <li key={i}>{f}</li>
+                    <li key={i}>
+                      {listIconsFeatures[i]}
+                      {f}
+                    </li>
                   ))}
                 </ul>
               </section>
@@ -64,4 +82,4 @@ function PlanCost() {
   );
 }
 
-export default PlanCost;
+export default ViewPlans;
