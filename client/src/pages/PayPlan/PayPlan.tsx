@@ -4,7 +4,7 @@ import "./PayPlan.css";
 function PayPlan() {
   const { planName } = useParams();
 
-  return <div></div>;
+  return <div className="pay-plan"></div>;
 }
 
 export default PayPlan;

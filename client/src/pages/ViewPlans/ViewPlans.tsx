@@ -4,7 +4,6 @@ import "./ViewPlans.css";
 import { FaVial } from "react-icons/fa";
 import { FaRegFileExcel } from "react-icons/fa";
 import { AiOutlineDollarCircle } from "react-icons/ai";
-import { Link } from "react-router-dom";
 
 const URL = import.meta.env.VITE_API_URL;
 
@@ -33,6 +32,21 @@ function ViewPlans() {
     fetchPlans();
   }, []);
 
+  // Funcion que redirigue al pago
+  const handleCheckout = async (priceId: any) => {
+    try {
+      const res = await fetch("http://localhost:4000/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ priceId }),
+      });
+      const data = await res.json();
+      window.location.href = data.url;
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <main className="plan-cost">
       <h1>Find the plan that fits your needs</h1>
@@ -52,12 +66,12 @@ function ViewPlans() {
                     {item.duration === 1 ? "month" : "months"}
                   </p>
                 </div>
-                <Link
-                  to={`/payPlan/${item.name}`}
-                  className="style-btn-black btn"
+                <button
+                  className="style-btn-black"
+                  onClick={() => handleCheckout(item.priceId)}
                 >
                   Get Started
-                </Link>
+                </button>
               </section>
               {/* Div de caracteristicas */}
               <section className="features-section">
