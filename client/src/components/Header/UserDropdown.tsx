@@ -11,14 +11,22 @@ import { getDaysRemaining } from "../../utils/getDaysRemaining "; //funcion para
 interface UserDropdownProps {
   email: string;
   planType: string;
-  planExpirationDate: string | null;
+  updatePlanDate: string | null;
+  planDuration: string | null;
   setIsProfile: Function;
   setIsConfiguration: Function;
 }
 
 const UserDropdown = forwardRef<HTMLDivElement, UserDropdownProps>(
   (
-    { email, planType, planExpirationDate, setIsProfile, setIsConfiguration },
+    {
+      email,
+      planType,
+      updatePlanDate,
+      planDuration,
+      setIsProfile,
+      setIsConfiguration,
+    },
     ref
   ) => {
     //Estados para controlar las paginas desplegables dentro del dropdown
@@ -38,7 +46,10 @@ const UserDropdown = forwardRef<HTMLDivElement, UserDropdownProps>(
         text:
           planType === "Free"
             ? "Switch to higher plan"
-            : `You have ${getDaysRemaining(planExpirationDate)} days left`,
+            : `You have ${getDaysRemaining(
+                updatePlanDate,
+                planDuration
+              )} days left`,
         onClick: () => navigate("/viewPlans"),
       },
       //Configuracion general

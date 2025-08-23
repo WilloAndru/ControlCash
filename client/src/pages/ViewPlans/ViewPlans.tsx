@@ -4,13 +4,16 @@ import "./ViewPlans.css";
 import { FaVial } from "react-icons/fa";
 import { FaRegFileExcel } from "react-icons/fa";
 import { AiOutlineDollarCircle } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 const URL = import.meta.env.VITE_API_URL;
 
 function ViewPlans() {
   const [dataPlans, setDataPlans] = useState<any[]>([]);
   const storedUser = localStorage.getItem("userData");
-  const userData = storedUser ? JSON.parse(storedUser) : null;
+  let userData = storedUser ? JSON.parse(storedUser) : null;
+
+  const navigate = useNavigate();
 
   // Lista de iconos para las caracteristicas
   const listIconsFeatures = [
@@ -50,6 +53,32 @@ function ViewPlans() {
     }
   };
 
+  // Funcion para cambiar de plan
+  const handleChangePlan = async (userUid: string, planId: number) => {
+    try {
+      const response = await axios.patch(`${URL}/changePlan`, {
+        userUid,
+        planId,
+      });
+      if (response.status === 200) {
+        userData.planId = planId;
+        userData.updatePlanDate = new Date();
+        localStorage.setItem("userData", JSON.stringify(userData));
+        const planData = {
+          id: response.data.id,
+          name: response.data.name,
+          price: response.data.price,
+          duration: response.data.duration,
+          paymentProviderId: response.data.paymentProviderId,
+        };
+        localStorage.setItem("planData", JSON.stringify(planData));
+        navigate("/");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <main className="plan-cost">
       <h1>Find the plan that fits your needs</h1>
@@ -71,12 +100,12 @@ function ViewPlans() {
                 </div>
                 <button
                   className="style-btn-black"
-                  disabled={index === 0 || userData.planId === index + 1}
+                  disabled={index === 0 || userData?.planId === index + 1}
                   onClick={() => handleCheckout(item.paymentProviderId)}
                 >
                   {index === 0
                     ? "Default Plan"
-                    : userData.planId === index + 1
+                    : userData?.planId === index + 1
                     ? "Your current plan"
                     : "Get Started"}
                 </button>
@@ -95,6 +124,13 @@ function ViewPlans() {
                     </li>
                   ))}
                 </ul>
+                <button
+                  disabled={userData?.planId === index + 1}
+                  className="style-btn-black"
+                  onClick={() => handleChangePlan(userData?.uid, index + 1)}
+                >
+                  Change to this Plan (For testing only)
+                </button>
               </section>
             </section>
           );

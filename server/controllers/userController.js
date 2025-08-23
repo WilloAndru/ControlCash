@@ -3,6 +3,7 @@ import { PlanModel } from "../models/planModel.js";
 import { UserModel } from "../models/userModel.js";
 import getLocation from "../utils/getLocation.js";
 
+// Toda la logica de auth con google, tanto registro como login
 export const authGoogle = async (req, res) => {
   const { token } = req.body;
 
@@ -41,5 +42,24 @@ export const authGoogle = async (req, res) => {
   } catch (error) {
     console.error("Error", error);
     res.status(401).json({ message: "Invalid Token" });
+  }
+};
+
+// Cambiar plan de usuario
+export const changePlan = async (req, res) => {
+  const { userUid, planId } = req.body;
+
+  try {
+    const user = await UserModel.findOne({ where: { uid: userUid } });
+    const plan = await PlanModel.findOne({ where: { id: planId } });
+
+    user.planId = planId;
+    user.updatePlanDate = new Date();
+    await user.save();
+
+    res.status(200).json(plan);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to update plan" });
   }
 };

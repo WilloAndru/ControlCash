@@ -33,7 +33,7 @@ function Auth() {
           city: response.data.user.city,
           income: response.data.user.income,
           planId: response.data.user.planId,
-          planExpirationDate: response.data.user.planExpirationDate,
+          updatePlanDate: response.data.user.updatePlanDate,
         };
         localStorage.setItem("userData", JSON.stringify(userData));
         const planData = {

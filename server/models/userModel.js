@@ -19,5 +19,5 @@ export const UserModel = db.define("users", {
       key: "id",
     },
   },
-  planExpirationDate: { type: DataTypes.DATE, allowNull: true },
+  updatePlanDate: { type: DataTypes.DATE, allowNull: true },
 });
