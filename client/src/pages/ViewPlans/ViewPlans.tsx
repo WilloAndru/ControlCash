@@ -9,14 +9,17 @@ const URL = import.meta.env.VITE_API_URL;
 
 function ViewPlans() {
   const [dataPlans, setDataPlans] = useState<any[]>([]);
+  const storedUser = localStorage.getItem("userData");
+  const userData = storedUser ? JSON.parse(storedUser) : null;
 
+  // Lista de iconos para las caracteristicas
   const listIconsFeatures = [
     <FaVial className="icon" />,
     <FaRegFileExcel className="icon" />,
     <AiOutlineDollarCircle className="icon" />,
   ];
 
-  //Obtiene los datos de los planes del servidor
+  // Obtiene los datos de los planes del servidor
   useEffect(() => {
     const fetchPlans = async () => {
       try {
@@ -33,17 +36,17 @@ function ViewPlans() {
   }, []);
 
   // Funcion que redirigue al pago
-  const handleCheckout = async (priceId: any) => {
+  const handleCheckout = async (paymentProviderId: string) => {
     try {
-      const res = await fetch("http://localhost:4000/api/checkout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ priceId }),
+      const { data } = await axios.post(`${URL}/checkout`, {
+        paymentProviderId,
       });
-      const data = await res.json();
-      window.location.href = data.url;
+
+      if (data.url) {
+        window.location.href = data.url;
+      }
     } catch (err) {
-      console.error(err);
+      console.error("Error:", err);
     }
   };
 
@@ -68,9 +71,14 @@ function ViewPlans() {
                 </div>
                 <button
                   className="style-btn-black"
-                  onClick={() => handleCheckout(item.priceId)}
+                  disabled={index === 0 || userData.planId === index + 1}
+                  onClick={() => handleCheckout(item.paymentProviderId)}
                 >
-                  Get Started
+                  {index === 0
+                    ? "Default Plan"
+                    : userData.planId === index + 1
+                    ? "Your current plan"
+                    : "Get Started"}
                 </button>
               </section>
               {/* Div de caracteristicas */}

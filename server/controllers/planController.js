@@ -10,17 +10,13 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
 // Crear sesión de Checkout con Stripe
 export const createCheckoutSession = async (req, res) => {
   try {
-    const { priceId } = req.body;
-
-    if (!priceId) {
-      return res.status(400).json({ message: "priceId es requerido" });
-    }
+    const { paymentProviderId } = req.body;
 
     const session = await stripe.checkout.sessions.create({
       mode: "subscription",
-      line_items: [{ price: priceId, quantity: 1 }],
+      line_items: [{ price: paymentProviderId, quantity: 1 }],
       success_url: "http://localhost:5173/success",
-      cancel_url: "http://localhost:5173/cancel",
+      cancel_url: "http://localhost:5173/viewPlans",
     });
 
     res.json({ url: session.url });

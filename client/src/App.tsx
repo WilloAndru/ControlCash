@@ -5,7 +5,6 @@ import Footer from "./components/Footer/Footer";
 import Home from "./pages/Home/Home";
 import Auth from "./pages/Auth/Auth";
 import ViewPlans from "./pages/ViewPlans/ViewPlans";
-import PayPlan from "./pages/PayPlan/PayPlan";
 
 function App() {
   const location = useLocation();
@@ -19,7 +18,6 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/viewPlans" element={<ViewPlans />} />
-          <Route path="/payPlan/:plan" element={<PayPlan />} />
         </Routes>
         {!hideLayout && <Footer />}
       </div>

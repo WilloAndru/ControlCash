@@ -9,7 +9,7 @@ export const UserModel = db.define("users", {
   avatar: { type: DataTypes.STRING },
   country: { type: DataTypes.STRING },
   city: { type: DataTypes.STRING },
-  income: { type: DataTypes.STRING, allowNull: true },
+  savings: { type: DataTypes.STRING, allowNull: true },
   planId: {
     type: DataTypes.INTEGER,
     allowNull: false,

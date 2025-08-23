@@ -15,12 +15,12 @@ const Profile = forwardRef<HTMLDivElement, ProfileProps>(
     const initialData = {
       country: userData.country || "",
       city: userData.city || "",
-      income: userData.income || "",
+      savings: userData.savings || "",
     };
 
     const [country, setCountry] = useState(userData.country || "");
     const [city, setCity] = useState(userData.city || "");
-    const [income, setIncome] = useState(userData.income || "");
+    const [savings, setSavings] = useState(userData.savings || "");
 
     // Lista de inputs
     const listDatas = [
@@ -31,9 +31,9 @@ const Profile = forwardRef<HTMLDivElement, ProfileProps>(
       },
       { title: "Which city do you live in?", value: city, onChange: setCity },
       {
-        title: "What is your monthly income?",
-        value: income,
-        onChange: setIncome,
+        title: "What are your monthly savings?",
+        value: savings,
+        onChange: setSavings,
       },
     ];
 
@@ -42,14 +42,14 @@ const Profile = forwardRef<HTMLDivElement, ProfileProps>(
       return (
         country !== initialData.country ||
         city !== initialData.city ||
-        income !== initialData.income
+        savings !== initialData.savings
       );
-    }, [country, city, income]);
+    }, [country, city, savings]);
 
     // Envio del formulario
     const saveDatas = (e: React.FormEvent) => {
       e.preventDefault();
-      console.log("Guardando datos:", { country, city, income });
+      console.log("Guardando datos:", { country, city, savings });
     };
 
     return (

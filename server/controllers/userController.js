@@ -22,7 +22,7 @@ export const authGoogle = async (req, res) => {
         avatar: picture,
         country: country,
         city: city,
-        income: null,
+        savings: null,
         planId: 1,
         plantExpirationDate: null,
       });
