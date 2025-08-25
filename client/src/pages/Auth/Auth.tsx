@@ -1,11 +1,17 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { signInWithPopup } from "firebase/auth";
-import { auth, provider } from "../../firebase/firebase";
+import { signInWithPopup, fetchSignInMethodsForEmail } from "firebase/auth";
+import {
+  auth,
+  googleProvider,
+  facebookProvider,
+} from "../../firebase/firebase";
 import { FcGoogle } from "react-icons/fc";
+import { FaFacebook } from "react-icons/fa";
 import axios from "axios";
 import "./Auth.css";
 import Brand from "../../components/Brand/Brand";
+import { FirebaseError } from "firebase/app";
 
 const URL = import.meta.env.VITE_API_URL;
 
@@ -13,47 +19,43 @@ function Auth() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  //Funcion de autenticacion con google
-  const authWithGoogle = async () => {
+  //Funcion de autenticacion
+  const handleAuth = async (provider: string) => {
     try {
-      // Autentica al usuario con Google mediante una ventana emergente
-      const result = await signInWithPopup(auth, provider);
+      // Autentica al usuario mediante una ventana emergente
+      const result = await signInWithPopup(
+        auth,
+        provider === "google" ? googleProvider : facebookProvider
+      );
       // Obtiene el token de autenticación del usuario
       const token = await result.user.getIdToken();
       // Envía el token al backend para validación e inicio de sesión
-      const response = await axios.post(`${URL}/google`, { token });
+      const response = await axios.post(`${URL}/authProvider`, { token });
       // Guarda los datos de usuario en el localstorage y redirigue al home
       if (response.status === 200) {
-        const userData = {
-          uid: response.data.user.uid,
-          name: response.data.user.name,
-          email: response.data.user.email,
-          avatar: response.data.user.avatar,
-          country: response.data.user.country,
-          city: response.data.user.city,
-          income: response.data.user.income,
-          planId: response.data.user.planId,
-          updatePlanDate: response.data.user.updatePlanDate,
-        };
-        localStorage.setItem("userData", JSON.stringify(userData));
-        const planData = {
-          id: response.data.plan.id,
-          name: response.data.plan.name,
-          price: response.data.plan.price,
-          duration: response.data.plan.duration,
-          paymentProviderId: response.data.plan.paymentProviderId,
-        };
-        localStorage.setItem("planData", JSON.stringify(planData));
+        localStorage.setItem("userData", JSON.stringify(response.data.user));
+        localStorage.setItem("planData", JSON.stringify(response.data.plan));
         navigate("/");
       } else {
         setError("Server authentication failed.");
       }
     } catch (err) {
-      const message = axios.isAxiosError(err)
-        ? err.response?.data?.error || "Server error during authentication."
-        : err instanceof Error
-        ? err.message
-        : "Unexpected error occurred.";
+      let message = "Unexpected error occurred.";
+
+      if (err instanceof FirebaseError) {
+        if (err.code === "auth/account-exists-with-different-credential") {
+          const email = (err as any).customData?.email;
+          const methods = await fetchSignInMethodsForEmail(auth, email);
+          message = `This email is already associated with ${methods[0]}. Sign in using that method to link your account.`;
+        } else {
+          message = err.message;
+        }
+      } else if (axios.isAxiosError(err)) {
+        message =
+          err.response?.data?.error ?? "Server error during authentication.";
+      } else if (err instanceof Error) {
+        message = err.message;
+      }
 
       setError(message);
     }
@@ -78,9 +80,14 @@ function Auth() {
             </p>
           </div>
           {/* Boton de google */}
-          <button onClick={authWithGoogle}>
+          <button onClick={() => handleAuth("google")}>
             <FcGoogle className="icon-google" />
             Login with Google
+          </button>
+          {/* Boton de facebook */}
+          <button onClick={() => handleAuth("facebook")}>
+            <FaFacebook className="icon-google" />
+            Login with Facebook
           </button>
         </div>
 

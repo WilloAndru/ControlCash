@@ -4,43 +4,46 @@ import { UserModel } from "../models/userModel.js";
 import getLocation from "../utils/getLocation.js";
 
 // Toda la logica de auth con google, tanto registro como login
-export const authGoogle = async (req, res) => {
+export const authProvider = async (req, res) => {
   const { token } = req.body;
 
   try {
+    // Verificamos el token de Firebase (sirve para cualquier proveedor)
     const decodedToken = await admin.auth().verifyIdToken(token);
     const { email, name, picture, uid } = decodedToken;
     const { country, city } = await getLocation(req);
 
+    // Si el proveedor no devuelve email, asignamos uno genérico
+    const userEmail = email || `${uid}@noemail.firebase`;
+
+    // Buscamos usuario por UID o email (si prefieres permitir login cruzado por email)
     let user = await UserModel.findOne({ where: { uid: uid } });
 
-    // Creamos usuario
     if (!user) {
       user = await UserModel.create({
         uid,
-        name,
-        email,
-        avatar: picture,
+        name: name || "Anonymous",
+        email: userEmail,
+        avatar: picture || null,
         country: country,
         city: city,
         savings: null,
         planId: 1,
         plantExpirationDate: null,
       });
-    }
-    // Modificamos localizacion de usuario existente si se cambio de ip
-    else {
+    } else {
+      // Si existe y cambió ubicación, actualizamos
       if (user.country !== country || user.city !== city) {
         await user.update({ country, city });
       }
     }
 
-    // Enviamos los datos del plan de pago
+    // Obtenemos el plan actual del usuario
     const plan = await PlanModel.findOne({ where: { id: user.planId } });
 
     res.status(200).json({ user, plan });
   } catch (error) {
-    console.error("Error", error);
+    console.error("Auth Error:", error);
     res.status(401).json({ message: "Invalid Token" });
   }
 };

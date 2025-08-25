@@ -1,5 +1,5 @@
 import express from "express";
-import { authGoogle, changePlan } from "../controllers/userController.js";
+import { authProvider, changePlan } from "../controllers/userController.js";
 import {
   getPlans,
   createCheckoutSession,
@@ -7,7 +7,7 @@ import {
 
 const router = express.Router();
 
-router.post("/google", authGoogle);
+router.post("/authProvider", authProvider);
 router.patch("/changePlan", changePlan);
 router.get("/getPlans", getPlans);
 router.post("/checkout", createCheckoutSession);
