@@ -66,3 +66,30 @@ export const changePlan = async (req, res) => {
     res.status(500).json({ message: "Failed to update plan" });
   }
 };
+
+// Cambiar datos de usuario
+export const editUserData = async (req, res) => {
+  const { userUid, country, city, savings } = req.body;
+
+  try {
+    const user = await UserModel.findOne({ where: { uid: userUid } });
+
+    if (country) {
+      user.country = country;
+    }
+
+    if (city) {
+      user.city = city;
+    }
+
+    if (savings) {
+      user.savings = savings;
+    }
+
+    await user.save();
+    res.status(200).json({ user });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to edit datas" });
+  }
+};

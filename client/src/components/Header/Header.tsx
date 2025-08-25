@@ -5,6 +5,7 @@ import Profile from "../../pages/PagesDropdown/Profile";
 import Configuration from "../../pages/PagesDropdown/Configuration";
 import Brand from "../Brand/Brand";
 import UserDropdown from "./UserDropdown";
+import { useProfile } from "../../context/ProfileContext";
 
 function Header() {
   const storedUser = localStorage.getItem("userData");
@@ -18,7 +19,7 @@ function Header() {
   const dropdownRef = useRef<HTMLDivElement>(null); //Referencia del menu desplegable
   const profilePageRef = useRef<HTMLDivElement>(null); //Referencia a la pagina perfil
   const configurationPageRef = useRef<HTMLDivElement>(null); //Referencia a la pagina configuracion
-  const [isProfile, setIsProfile] = useState(false);
+  const { isProfile, setIsProfile } = useProfile();
   const [isConfiguration, setIsConfiguration] = useState(false);
 
   //Cierres o despliege de los refs
@@ -71,15 +72,6 @@ function Header() {
     <header className="header">
       {/* Seccion de marca */}
       <Brand />
-
-      {/* Seccion de opciones */}
-      {userData && (
-        <section>
-          <Link to="/proyection" className="option-link">
-            Proyection
-          </Link>
-        </section>
-      )}
 
       {/* Seccion derecha */}
       {!userData ? (

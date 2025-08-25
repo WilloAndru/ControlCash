@@ -64,6 +64,7 @@ const UserDropdown = forwardRef<HTMLDivElement, UserDropdownProps>(
         text: "Log out",
         onClick: () => {
           localStorage.removeItem("userData");
+          localStorage.removeItem("planData");
           window.location.reload();
         },
       },

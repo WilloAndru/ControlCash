@@ -107,6 +107,7 @@ input {
   border-radius: 0.5rem;
   border: 1px solid var(--color-bg-hover);
   background-color: transparent;
+  font-size: 1rem;
 
   &:focus {
     outline: none;
@@ -152,6 +153,12 @@ input {
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
+
+        .advice {
+          padding: 0.5rem 1rem;
+          background-color: var(--color-white);
+          border-radius: 1rem;
+        }
       }
 
       main {

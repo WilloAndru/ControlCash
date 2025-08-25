@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState, useMemo } from "react";
 import { forwardRef } from "react"; //soporte de ref en componentes hijos
 import { IoClose } from "react-icons/io5";
@@ -6,10 +7,14 @@ interface ProfileProps {
   setIsShow: (value: boolean) => void;
 }
 
+const URL = import.meta.env.VITE_API_URL;
+
 const Profile = forwardRef<HTMLDivElement, ProfileProps>(
   ({ setIsShow }, ref) => {
     const stored = localStorage.getItem("userData");
     const userData = stored ? JSON.parse(stored) : {};
+    const isCompleteData =
+      userData.city && userData.country && userData.savings;
 
     // Estado inicial de datos para comparar con los modificados y comprobar si hay cambios
     const initialData = {
@@ -47,9 +52,15 @@ const Profile = forwardRef<HTMLDivElement, ProfileProps>(
     }, [country, city, savings]);
 
     // Envio del formulario
-    const saveDatas = (e: React.FormEvent) => {
+    const saveDatas = async (e: React.FormEvent) => {
       e.preventDefault();
-      console.log("Guardando datos:", { country, city, savings });
+      const result = await axios.patch(`${URL}/editUserData`, {
+        userUid: userData?.uid,
+        country,
+        city,
+        savings,
+      });
+      console.log(result.data);
     };
 
     return (
@@ -66,9 +77,11 @@ const Profile = forwardRef<HTMLDivElement, ProfileProps>(
             {/* Header */}
             <header className="headerpage-dropdown">
               <h2>Custom your profile</h2>
-              <p>
-                Edit your information to get more accurate estimates and costs.
-              </p>
+              {!isCompleteData && (
+                <p className="advice">
+                  Complete your information to get accurate estimates and costs.
+                </p>
+              )}
             </header>
             {/* Inputs */}
             <main>
@@ -76,6 +89,7 @@ const Profile = forwardRef<HTMLDivElement, ProfileProps>(
                 <div key={index} className="options">
                   <h4>{item.title}</h4>
                   <input
+                    placeholder="Please fill out this field"
                     type="text"
                     value={item.value}
                     onChange={(e) => item.onChange(e.target.value)}

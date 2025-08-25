@@ -1,5 +1,9 @@
 import express from "express";
-import { authProvider, changePlan } from "../controllers/userController.js";
+import {
+  authProvider,
+  changePlan,
+  editUserData,
+} from "../controllers/userController.js";
 import {
   getPlans,
   createCheckoutSession,
@@ -9,6 +13,7 @@ const router = express.Router();
 
 router.post("/authProvider", authProvider);
 router.patch("/changePlan", changePlan);
+router.patch("/editUserData", editUserData);
 router.get("/getPlans", getPlans);
 router.post("/checkout", createCheckoutSession);
 
