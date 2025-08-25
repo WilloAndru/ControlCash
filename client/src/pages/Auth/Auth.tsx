@@ -5,9 +5,11 @@ import {
   auth,
   googleProvider,
   facebookProvider,
+  githubProvider,
 } from "../../firebase/firebase";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
 import axios from "axios";
 import "./Auth.css";
 import Brand from "../../components/Brand/Brand";
@@ -25,7 +27,11 @@ function Auth() {
       // Autentica al usuario mediante una ventana emergente
       const result = await signInWithPopup(
         auth,
-        provider === "google" ? googleProvider : facebookProvider
+        provider === "google"
+          ? googleProvider
+          : provider === "facebook"
+          ? facebookProvider
+          : githubProvider
       );
       // Obtiene el token de autenticación del usuario
       const token = await result.user.getIdToken();
@@ -83,6 +89,11 @@ function Auth() {
           <button onClick={() => handleAuth("google")}>
             <FcGoogle className="icon-google" />
             Login with Google
+          </button>
+          {/* Boton de github */}
+          <button onClick={() => handleAuth("github")}>
+            <FaGithub className="icon-google" />
+            Login with GitHub
           </button>
           {/* Boton de facebook */}
           <button onClick={() => handleAuth("facebook")}>

@@ -34,13 +34,16 @@
         background-color: var(--color-bg);
 
         .icon-google {
-          font-size: 1.1rem;
+          font-size: 1.2rem;
         }
 
         &:hover {
-          background-color: var(--color-black);
           color: var(--color-white);
+          background-color: var(--color-black);
         }
+      }
+      button:hover * {
+        color: var(--color-white);
       }
     }
   }
