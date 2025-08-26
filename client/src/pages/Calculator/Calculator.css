@@ -3,12 +3,50 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 70vh;
+  height: 65vh;
+  margin: 1.5rem;
 
   .havent-filled-div {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+  }
+
+  .loading-div {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+
+    .icon {
+      font-size: 2rem;
+    }
+  }
+
+  .calculator-div {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    .container {
+      background-color: var(--color-white);
+      border-radius: 1rem;
+      width: 15rem;
+      height: 10rem;
+    }
+
+    .top-div {
+      display: flex;
+      gap: 1.5rem;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .calculator {
+    margin: 3rem;
+    .top-div {
+      flex-direction: column;
+    }
   }
 }

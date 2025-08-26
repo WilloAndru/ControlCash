@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import { forwardRef } from "react"; //soporte de ref en componentes hijos
 import { IoClose } from "react-icons/io5";
 
