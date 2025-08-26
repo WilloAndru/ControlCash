@@ -69,25 +69,11 @@ export const changePlan = async (req, res) => {
 
 // Cambiar datos de usuario
 export const editUserData = async (req, res) => {
-  const { userUid, country, city, savings } = req.body;
-
+  const { userUid, ...fields } = req.body;
   try {
-    const user = await UserModel.findOne({ where: { uid: userUid } });
-
-    if (country) {
-      user.country = country;
-    }
-
-    if (city) {
-      user.city = city;
-    }
-
-    if (savings) {
-      user.savings = savings;
-    }
-
-    await user.save();
-    res.status(200).json({ user });
+    //Metodo directo que actualiza datos de usuario
+    await UserModel.update(fields, { where: { uid: userUid } });
+    return res.sendStatus(204);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Failed to edit datas" });

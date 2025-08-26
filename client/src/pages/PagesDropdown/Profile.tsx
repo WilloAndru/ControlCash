@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { forwardRef } from "react"; //soporte de ref en componentes hijos
 import { IoClose } from "react-icons/io5";
 
@@ -12,7 +12,7 @@ const URL = import.meta.env.VITE_API_URL;
 const Profile = forwardRef<HTMLDivElement, ProfileProps>(
   ({ setIsShow }, ref) => {
     const stored = localStorage.getItem("userData");
-    const userData = stored ? JSON.parse(stored) : {};
+    const [userData, setUserData] = useState(stored ? JSON.parse(stored) : {});
     const isCompleteData =
       userData.city && userData.country && userData.savings;
 
@@ -54,13 +54,26 @@ const Profile = forwardRef<HTMLDivElement, ProfileProps>(
     // Envio del formulario
     const saveDatas = async (e: React.FormEvent) => {
       e.preventDefault();
-      const result = await axios.patch(`${URL}/editUserData`, {
-        userUid: userData?.uid,
-        country,
-        city,
-        savings,
-      });
-      console.log(result.data);
+      try {
+        // Editamos datos del usuario
+        const result = await axios.patch(`${URL}/editUserData`, {
+          userUid: userData?.uid,
+          country,
+          city,
+          savings,
+        });
+        // Guardamos en localStorage
+        if (result.status === 204) {
+          setUserData((prev: any) => {
+            const updated = { ...prev, country, city, savings };
+            localStorage.setItem("userData", JSON.stringify(updated));
+            return updated;
+          });
+          window.location.reload();
+        }
+      } catch (error) {
+        console.error("Error", error);
+      }
     };
 
     return (
