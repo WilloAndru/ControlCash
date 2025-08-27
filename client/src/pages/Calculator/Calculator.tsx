@@ -3,6 +3,7 @@ import "./Calculator.css";
 import { useProfile } from "../../context/ProfileContext";
 import axios from "axios";
 import { SiOpenai } from "react-icons/si";
+import { FaRegFileExcel } from "react-icons/fa";
 
 function Calculator() {
   const storedData = localStorage.getItem("userData");
@@ -11,10 +12,33 @@ function Calculator() {
   const { setIsProfile } = useProfile();
   const [isLoading, setIsLoading] = useState(false);
   const [resPromp, setResPromp] = useState("");
+  const [costProperty, setCostProperty] = useState<number>(1800000000);
 
+  const listStatistics = [
+    {
+      name: "Estimated acquisition time",
+      description: "5 years and 6 months",
+    },
+    {
+      name: "Estimated time in months",
+      description: "66 months",
+    },
+    {
+      name: "Acquisition date",
+      description: "August 2028",
+    },
+  ];
+
+  const formatCOP = (value: number) =>
+    new Intl.NumberFormat("es-CO", {
+      style: "currency",
+      currency: "COP",
+      minimumFractionDigits: 0,
+    }).format(value);
+
+  // Inicia la carga de la respuesta del promp a chatGPT
   const fetchData = async () => {
     try {
-      // Inicia la carga
       setIsLoading(true);
       // Simulación de espera de 3s (como si fuera la API)
       setTimeout(() => {
@@ -47,13 +71,36 @@ function Calculator() {
         ) : (
           // Interfaz de calculadora
           <section className="calculator">
-            <div className="calculator-div">
-              <div className="top-div">
-                <section className="container"></section>
-                <section className="container"></section>
+            <section className="container">
+              <h1>Learning statistics</h1>
+              <div className="cost-property-div">
+                <h3>Cost of the property</h3>
+                <input
+                  type="text"
+                  value={costProperty}
+                  onChange={(e) => setCostProperty(Number(e.target.value))}
+                />
               </div>
-              <section className="container"></section>
-            </div>
+              <div className="list-statistics">
+                {listStatistics.map((item, index) => {
+                  return (
+                    <div>
+                      <h3 className="text-gray">{item.name}</h3>
+                      <h3>{item.description}</h3>
+                    </div>
+                  );
+                })}
+              </div>
+            </section>
+            <section className="container table">
+              <header>
+                <h1>Table</h1>
+                <button>
+                  <FaRegFileExcel className="icon" /> Import
+                </button>
+              </header>
+              <table></table>
+            </section>
           </section>
         )
       ) : (
@@ -62,8 +109,8 @@ function Calculator() {
           <div className="havent-filled-div">
             <h1>
               You haven’t filled in your details yet:
-              {!userData.city && " City,"}
-              {!userData.country && " Country,"}
+              {!userData.city && " City"}
+              {!userData.country && " Country"}
               {!userData.savings && " Savings"}
             </h1>
             <button
