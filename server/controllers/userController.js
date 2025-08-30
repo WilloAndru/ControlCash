@@ -16,9 +16,6 @@ export const authProvider = async (req, res) => {
     const { email, name, picture, uid } = decodedToken;
     const { country, city } = await getLocation(req);
 
-    // Si el proveedor no devuelve email, asignamos uno genérico
-    const userEmail = email || `${uid}@noemail.firebase`;
-
     // Buscamos usuario por UID o email (si prefieres permitir login cruzado por email)
     let user = await UserModel.findOne({ where: { uid: uid } });
 
@@ -34,11 +31,6 @@ export const authProvider = async (req, res) => {
         planId: 1,
         plantExpirationDate: null,
       });
-    } else {
-      // Si existe y cambió ubicación, actualizamos
-      if (user.country !== country || user.city !== city) {
-        await user.update({ country, city });
-      }
     }
 
     // Obtenemos el plan actual del usuario
