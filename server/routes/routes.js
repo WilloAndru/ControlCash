@@ -3,6 +3,7 @@ import {
   authProvider,
   changePlan,
   editUserData,
+  getPrices,
 } from "../controllers/userController.js";
 import {
   getPlans,
@@ -16,5 +17,6 @@ router.patch("/changePlan", changePlan);
 router.patch("/editUserData", editUserData);
 router.get("/getPlans", getPlans);
 router.post("/checkout", createCheckoutSession);
+router.post("/getPrices", getPrices);
 
 export default router;
