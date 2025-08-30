@@ -39,6 +39,15 @@ button {
   padding: 0.5rem 1rem;
   cursor: pointer;
   border: 1px solid var(--color-bg-hover);
+}
+
+.style-btn-black {
+  background-color: var(--color-black);
+  color: var(--color-white);
+
+  &:hover {
+    background-color: var(--color-black-hover);
+  }
 
   &:disabled {
     background-color: #ccc;
@@ -51,20 +60,20 @@ button {
   }
 }
 
-.style-btn-black {
-  background-color: var(--color-black);
-  color: var(--color-white);
-
-  &:hover {
-    background-color: var(--color-black-hover);
-  }
-}
-
 .style-btn-white {
   background-color: var(--color-white);
 
   &:hover {
     background-color: var(--color-bg);
+  }
+
+  &:disabled {
+    background-color: var(--color-bg);
+    cursor: not-allowed;
+
+    &:hover {
+      background-color: var(--color-bg);
+    }
   }
 }
 

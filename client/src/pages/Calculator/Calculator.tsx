@@ -8,6 +8,7 @@ import { PiBuildingApartment } from "react-icons/pi";
 import { PiHouseLineBold } from "react-icons/pi";
 import { PiWarehouse } from "react-icons/pi";
 import { MdOutlineDashboardCustomize } from "react-icons/md";
+import { acquisitionTime } from "../../utils/acquisitionTime";
 
 const URL = import.meta.env.VITE_API_URL;
 
@@ -20,6 +21,8 @@ type Prices = {
 function Calculator() {
   const storedData = localStorage.getItem("userData");
   const userData = storedData ? JSON.parse(storedData) : {};
+  const storedPlan = localStorage.getItem("planData");
+  const planData = storedPlan ? JSON.parse(storedPlan) : {};
   const isCompleteData = userData.city && userData.country && userData.savings;
   const { setIsProfile } = useProfile();
   const [isLoading, setIsLoading] = useState(false);
@@ -29,6 +32,7 @@ function Calculator() {
     luxury: 0,
   });
   const [price, setPrice] = useState(0);
+  const [btnTarget, setBtnTarget] = useState(1);
 
   // Solicitud del promp de ChatGPT
   const handlePromp = async () => {
@@ -58,7 +62,7 @@ function Calculator() {
   }, []);
 
   return (
-    <main className="calculator">
+    <main className="calculator-main">
       {isCompleteData ? (
         isLoading ? (
           // Interfaz de cargando
@@ -74,27 +78,61 @@ function Calculator() {
             {/* Opciones de propiedades */}
             <section className="top-section">
               <button
+                style={{
+                  backgroundColor:
+                    btnTarget !== 1 ? "var(--color-bg-hover)" : undefined,
+                }}
                 className="style-btn-white"
-                onClick={() => setPrice(prices.apartment)}
+                onClick={() => {
+                  setPrice(prices.apartment);
+                  setBtnTarget(1);
+                }}
               >
                 <PiBuildingApartment className="icon" />
                 <h3>Apartment</h3>
               </button>
               <button
+                style={{
+                  backgroundColor:
+                    btnTarget !== 2 ? "var(--color-bg-hover)" : undefined,
+                }}
+                disabled={planData.id === 1}
                 className="style-btn-white"
-                onClick={() => setPrice(prices.house)}
+                onClick={() => {
+                  setPrice(prices.house);
+                  setBtnTarget(2);
+                }}
               >
                 <PiHouseLineBold className="icon" />
                 <h3>House</h3>
               </button>
               <button
+                style={{
+                  backgroundColor:
+                    btnTarget !== 3 ? "var(--color-bg-hover)" : undefined,
+                }}
+                disabled={planData.id === 1}
                 className="style-btn-white"
-                onClick={() => setPrice(prices.luxury)}
+                onClick={() => {
+                  setPrice(prices.luxury);
+                  setBtnTarget(3);
+                }}
               >
                 <PiWarehouse className="icon" />
                 <h3>Luxury House</h3>
               </button>
-              <button className="style-btn-white" onClick={() => setPrice(0)}>
+              <button
+                style={{
+                  backgroundColor:
+                    btnTarget !== 4 ? "var(--color-bg-hover)" : undefined,
+                }}
+                disabled={planData.id === 1}
+                className="style-btn-white"
+                onClick={() => {
+                  setPrice(0);
+                  setBtnTarget(4);
+                }}
+              >
                 <MdOutlineDashboardCustomize className="icon" />
                 <h3>Customize</h3>
               </button>
@@ -103,7 +141,7 @@ function Calculator() {
               {/* Seccion de estadisticas */}
               <section className="container">
                 <h1>Learning statistics</h1>
-                <p>
+                <p className="text-gray">
                   The following information is based on your data: City:{" "}
                   <strong>{userData.city}</strong>, Country:{" "}
                   <strong>{userData.country}</strong>, Savings:{" "}
@@ -122,15 +160,15 @@ function Calculator() {
                   </div>
                   <div>
                     <h3 className="text-gray">Estimated acquisition time</h3>
-                    <h3>5 years and 6 months</h3>
+                    <h3>{acquisitionTime(1, userData.savings, price)}</h3>
                   </div>
                   <div>
                     <h3 className="text-gray">Estimated time in months</h3>
-                    <h3>66 months</h3>
+                    <h3>{acquisitionTime(2, userData.savings, price)}</h3>
                   </div>
                   <div>
                     <h3 className="text-gray">Acquisition date</h3>
-                    <h3>August 2028</h3>
+                    <h3>{acquisitionTime(3, userData.savings, price)}</h3>
                   </div>
                 </div>
               </section>
