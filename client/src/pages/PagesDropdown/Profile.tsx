@@ -36,7 +36,7 @@ const Profile = forwardRef<HTMLDivElement, ProfileProps>(
       },
       { title: "Which city do you live in?", value: city, onChange: setCity },
       {
-        title: "What are your monthly savings?",
+        title: "What are your monthly savings in USD?",
         value: savings,
         onChange: setSavings,
       },

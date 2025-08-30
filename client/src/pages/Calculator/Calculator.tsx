@@ -4,6 +4,18 @@ import { useProfile } from "../../context/ProfileContext";
 import axios from "axios";
 import { SiOpenai } from "react-icons/si";
 import { FaRegFileExcel } from "react-icons/fa";
+import { PiBuildingApartment } from "react-icons/pi";
+import { PiHouseLineBold } from "react-icons/pi";
+import { PiWarehouse } from "react-icons/pi";
+import { MdOutlineDashboardCustomize } from "react-icons/md";
+
+const URL = import.meta.env.VITE_API_URL;
+
+type Prices = {
+  apartment: number;
+  house: number;
+  luxury: number;
+};
 
 function Calculator() {
   const storedData = localStorage.getItem("userData");
@@ -11,50 +23,38 @@ function Calculator() {
   const isCompleteData = userData.city && userData.country && userData.savings;
   const { setIsProfile } = useProfile();
   const [isLoading, setIsLoading] = useState(false);
-  const [resPromp, setResPromp] = useState("");
-  const [costProperty, setCostProperty] = useState<number>(1800000000);
+  const [prices, setPrices] = useState<Prices>({
+    apartment: 0,
+    house: 0,
+    luxury: 0,
+  });
+  const [price, setPrice] = useState(0);
 
-  const listStatistics = [
-    {
-      name: "Estimated acquisition time",
-      description: "5 years and 6 months",
-    },
-    {
-      name: "Estimated time in months",
-      description: "66 months",
-    },
-    {
-      name: "Acquisition date",
-      description: "August 2028",
-    },
-  ];
-
-  const formatCOP = (value: number) =>
-    new Intl.NumberFormat("es-CO", {
-      style: "currency",
-      currency: "COP",
-      minimumFractionDigits: 0,
-    }).format(value);
-
-  // Inicia la carga de la respuesta del promp a chatGPT
-  const fetchData = async () => {
+  // Solicitud del promp de ChatGPT
+  const handlePromp = async () => {
     try {
       setIsLoading(true);
-      // Simulación de espera de 3s (como si fuera la API)
-      setTimeout(() => {
+      const response = await axios.post(`${URL}/getPrices`, {
+        country: userData.country,
+        city: userData.city,
+        savings: userData.savings,
+      });
+      if (response.status === 200) {
+        setPrices(response.data);
+        setPrice(response.data.apartment);
         setIsLoading(false);
-      }, 3000);
+      }
     } catch (error: any) {
       console.error("Error:", error);
       setIsLoading(false);
-      setResPromp(
+      setPrices(
         error.response?.data?.message || error.message || "Something went wrong"
       );
     }
   };
 
   useEffect(() => {
-    isCompleteData ? fetchData() : setIsProfile(true);
+    isCompleteData ? handlePromp() : setIsProfile(true);
   }, []);
 
   return (
@@ -71,36 +71,80 @@ function Calculator() {
         ) : (
           // Interfaz de calculadora
           <section className="calculator">
-            <section className="container">
-              <h1>Learning statistics</h1>
-              <div className="cost-property-div">
-                <h3>Cost of the property</h3>
-                <input
-                  type="text"
-                  value={costProperty}
-                  onChange={(e) => setCostProperty(Number(e.target.value))}
-                />
-              </div>
-              <div className="list-statistics">
-                {listStatistics.map((item, index) => {
-                  return (
-                    <div>
-                      <h3 className="text-gray">{item.name}</h3>
-                      <h3>{item.description}</h3>
-                    </div>
-                  );
-                })}
-              </div>
+            {/* Opciones de propiedades */}
+            <section className="top-section">
+              <button
+                className="style-btn-white"
+                onClick={() => setPrice(prices.apartment)}
+              >
+                <PiBuildingApartment className="icon" />
+                <h3>Apartment</h3>
+              </button>
+              <button
+                className="style-btn-white"
+                onClick={() => setPrice(prices.house)}
+              >
+                <PiHouseLineBold className="icon" />
+                <h3>House</h3>
+              </button>
+              <button
+                className="style-btn-white"
+                onClick={() => setPrice(prices.luxury)}
+              >
+                <PiWarehouse className="icon" />
+                <h3>Luxury House</h3>
+              </button>
+              <button className="style-btn-white" onClick={() => setPrice(0)}>
+                <MdOutlineDashboardCustomize className="icon" />
+                <h3>Customize</h3>
+              </button>
             </section>
-            <section className="container table">
-              <header>
-                <h1>Table</h1>
-                <button>
-                  <FaRegFileExcel className="icon" /> Import
+            <div className="bottom-div">
+              {/* Seccion de estadisticas */}
+              <section className="container">
+                <h1>Learning statistics</h1>
+                <p>
+                  The following information is based on your data: City:{" "}
+                  <strong>{userData.city}</strong>, Country:{" "}
+                  <strong>{userData.country}</strong>, Savings:{" "}
+                  <strong>{userData.savings}</strong> USD.
+                </p>
+                <button
+                  className="style-btn-black"
+                  onClick={() => setIsProfile(true)}
+                >
+                  Edit your datas here
                 </button>
-              </header>
-              <table></table>
-            </section>
+                <div className="list-statistics">
+                  <div>
+                    <h3 className="text-gray">Cost of the property</h3>
+                    <h3>{new Intl.NumberFormat("en-US").format(price)} USD</h3>
+                  </div>
+                  <div>
+                    <h3 className="text-gray">Estimated acquisition time</h3>
+                    <h3>5 years and 6 months</h3>
+                  </div>
+                  <div>
+                    <h3 className="text-gray">Estimated time in months</h3>
+                    <h3>66 months</h3>
+                  </div>
+                  <div>
+                    <h3 className="text-gray">Acquisition date</h3>
+                    <h3>August 2028</h3>
+                  </div>
+                </div>
+              </section>
+              {/* Tabla */}
+              <section className="container table">
+                <header>
+                  <h1>Table</h1>
+                  <button>
+                    <FaRegFileExcel className="icon" /> Import
+                  </button>
+                </header>
+                <table></table>
+              </section>
+            </div>
           </section>
         )
       ) : (
