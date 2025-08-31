@@ -3,13 +3,13 @@ import "./Calculator.css";
 import { useProfile } from "../../context/ProfileContext";
 import axios from "axios";
 import { SiOpenai } from "react-icons/si";
-import { FaRegFileExcel } from "react-icons/fa";
 import { PiBuildingApartment } from "react-icons/pi";
 import { PiHouseLineBold } from "react-icons/pi";
 import { PiWarehouse } from "react-icons/pi";
 import { MdOutlineDashboardCustomize } from "react-icons/md";
 import { acquisitionTime } from "../../utils/acquisitionTime";
 import { FaArrowRight } from "react-icons/fa6";
+import { generateDataTable } from "../../utils/generateDataTable";
 
 const URL = import.meta.env.VITE_API_URL;
 
@@ -18,6 +18,13 @@ type Prices = {
   house: number;
   luxury: number;
 };
+
+interface DataRow {
+  id: number;
+  month: string;
+  investedAmount: number;
+  percentage: string;
+}
 
 function Calculator() {
   const storedData = localStorage.getItem("userData");
@@ -37,6 +44,7 @@ function Calculator() {
   const storedPrice = localStorage.getItem("customPrice");
   const customPrice = storedPrice ? JSON.parse(storedPrice) : 0;
   const [tempCustomPrice, setTempCustomPrice] = useState(customPrice);
+  const [dataTable, setDataTable] = useState<DataRow[]>([]);
 
   // Solicitud del promp de ChatGPT
   const handlePromp = async () => {
@@ -51,6 +59,9 @@ function Calculator() {
         setPrices(response.data);
         setPrice(response.data.apartment);
         setIsLoading(false);
+        setDataTable(
+          generateDataTable(Number(userData.savings), response.data.apartment)
+        );
       }
     } catch (error: any) {
       console.error("Error:", error);
@@ -66,17 +77,12 @@ function Calculator() {
     e.preventDefault();
     localStorage.setItem("customPrice", JSON.stringify(tempCustomPrice));
     setPrice(tempCustomPrice);
+    setDataTable(generateDataTable(Number(userData.savings), tempCustomPrice));
   };
 
   useEffect(() => {
     isCompleteData ? handlePromp() : setIsProfile(true);
   }, []);
-
-  const data = [
-    { id: 1, nombre: "Apartamento", ciudad: "Bogotá", precio: 120000 },
-    { id: 2, nombre: "Casa", ciudad: "Medellín", precio: 250000 },
-    { id: 3, nombre: "Oficina", ciudad: "Cali", precio: 175000 },
-  ];
 
   return (
     <main className="calculator-main">
@@ -103,6 +109,12 @@ function Calculator() {
                 onClick={() => {
                   setPrice(prices.apartment);
                   setBtnTarget(1);
+                  setDataTable(
+                    generateDataTable(
+                      Number(userData.savings),
+                      prices.apartment
+                    )
+                  );
                 }}
               >
                 <PiBuildingApartment className="icon" />
@@ -118,6 +130,9 @@ function Calculator() {
                 onClick={() => {
                   setPrice(prices.house);
                   setBtnTarget(2);
+                  setDataTable(
+                    generateDataTable(Number(userData.savings), prices.house)
+                  );
                 }}
               >
                 <PiHouseLineBold className="icon" />
@@ -133,6 +148,9 @@ function Calculator() {
                 onClick={() => {
                   setPrice(prices.luxury);
                   setBtnTarget(3);
+                  setDataTable(
+                    generateDataTable(Number(userData.savings), prices.luxury)
+                  );
                 }}
               >
                 <PiWarehouse className="icon" />
@@ -148,6 +166,12 @@ function Calculator() {
                 onClick={() => {
                   setPrice(customPrice || prices.apartment);
                   setBtnTarget(4);
+                  setDataTable(
+                    generateDataTable(
+                      Number(userData.savings),
+                      customPrice || prices.apartment
+                    )
+                  );
                 }}
               >
                 <MdOutlineDashboardCustomize className="icon" />
@@ -209,39 +233,34 @@ function Calculator() {
                   </div>
                 </div>
               </section>
-              {/* Tabla */}
+              {/* Seccion de Tabla */}
               <section className="container table">
                 <header>
                   <h1>Table</h1>
-                  <button>
-                    <FaRegFileExcel className="icon" /> Import
-                  </button>
+                  <button className="style-btn-black">Export to Excel</button>
                 </header>
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Conteo de meses</th>
-                      <th>Mes</th>
-                      <th>Dinero invertido</th>
-                      <th>Procentaje</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {data.map((item) => (
-                      <tr key={item.id}>
-                        <td>{item.id}</td>
-                        <td>{item.nombre}</td>
-                        <td>{item.ciudad}</td>
-                        <td>
-                          {item.precio.toLocaleString("en-US", {
-                            style: "currency",
-                            currency: "USD",
-                          })}
-                        </td>
+                <div className="table-wrapper">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Month Count</th>
+                        <th>Month</th>
+                        <th>Invested Amount</th>
+                        <th>Percentage</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      {dataTable.map((item) => (
+                        <tr key={item.id}>
+                          <td>{item.id}</td>
+                          <td>{item.month}</td>
+                          <td>{item.investedAmount}</td>
+                          <td>{item.percentage}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </section>
             </div>
           </section>
