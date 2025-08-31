@@ -108,7 +108,7 @@ function Auth() {
         </p>
       </section>
       {/* Imagen Derecha */}
-      <img className="img-right" src="imgHome1.jpg" alt="Image Auth" />
+      <img className="img-right" src="img1.jpg" alt="Image Auth" />
     </main>
   );
 }

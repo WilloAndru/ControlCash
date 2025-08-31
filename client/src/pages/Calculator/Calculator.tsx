@@ -10,6 +10,7 @@ import { MdOutlineDashboardCustomize } from "react-icons/md";
 import { acquisitionTime } from "../../utils/acquisitionTime";
 import { FaArrowRight } from "react-icons/fa6";
 import { generateDataTable } from "../../utils/generateDataTable";
+import * as XLSX from "xlsx";
 
 const URL = import.meta.env.VITE_API_URL;
 
@@ -80,6 +81,14 @@ function Calculator() {
     setDataTable(generateDataTable(Number(userData.savings), tempCustomPrice));
   };
 
+  // Exportar la tabla a excel
+  const exportToExcel = () => {
+    const worksheet = XLSX.utils.json_to_sheet(dataTable);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Table 1");
+    XLSX.writeFile(workbook, "ControlCash.xlsx");
+  };
+
   useEffect(() => {
     isCompleteData ? handlePromp() : setIsProfile(true);
   }, []);
@@ -98,7 +107,7 @@ function Calculator() {
         ) : (
           // Interfaz de calculadora
           <section className="calculator">
-            {/* Opciones de propiedades */}
+            {/* Seleccionar el tipo de viviendas */}
             <section className="top-section">
               <button
                 style={{
@@ -237,7 +246,9 @@ function Calculator() {
               <section className="container table">
                 <header>
                   <h1>Table</h1>
-                  <button className="style-btn-black">Export to Excel</button>
+                  <button onClick={exportToExcel} className="style-btn-black">
+                    Export to Excel
+                  </button>
                 </header>
                 <div className="table-wrapper">
                   <table>

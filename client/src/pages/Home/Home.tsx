@@ -8,7 +8,7 @@ function Home() {
   //Toda la logica del carrusel de imagenes
   const [currentImgIndex, setcurrentImgIndex] = useState(0);
 
-  const images = ["/imgHome1.jpg", "/imgHome2.jpg", "/imgHome3.jpg"];
+  const images = ["/img1.jpg", "/img2.png"];
 
   const indicators = images.map((_, index) => (
     <div
