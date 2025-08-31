@@ -9,6 +9,7 @@ import { PiHouseLineBold } from "react-icons/pi";
 import { PiWarehouse } from "react-icons/pi";
 import { MdOutlineDashboardCustomize } from "react-icons/md";
 import { acquisitionTime } from "../../utils/acquisitionTime";
+import { FaArrowRight } from "react-icons/fa6";
 
 const URL = import.meta.env.VITE_API_URL;
 
@@ -33,6 +34,9 @@ function Calculator() {
   });
   const [price, setPrice] = useState(0);
   const [btnTarget, setBtnTarget] = useState(1);
+  const storedPrice = localStorage.getItem("customPrice");
+  const customPrice = storedPrice ? JSON.parse(storedPrice) : 0;
+  const [tempCustomPrice, setTempCustomPrice] = useState(customPrice);
 
   // Solicitud del promp de ChatGPT
   const handlePromp = async () => {
@@ -57,9 +61,22 @@ function Calculator() {
     }
   };
 
+  // Edicion del precio personalizado
+  const handleEditCustomPrice = (e: React.FormEvent) => {
+    e.preventDefault();
+    localStorage.setItem("customPrice", JSON.stringify(tempCustomPrice));
+    setPrice(tempCustomPrice);
+  };
+
   useEffect(() => {
     isCompleteData ? handlePromp() : setIsProfile(true);
   }, []);
+
+  const data = [
+    { id: 1, nombre: "Apartamento", ciudad: "Bogotá", precio: 120000 },
+    { id: 2, nombre: "Casa", ciudad: "Medellín", precio: 250000 },
+    { id: 3, nombre: "Oficina", ciudad: "Cali", precio: 175000 },
+  ];
 
   return (
     <main className="calculator-main">
@@ -129,7 +146,7 @@ function Calculator() {
                 disabled={planData.id === 1}
                 className="style-btn-white"
                 onClick={() => {
-                  setPrice(0);
+                  setPrice(customPrice || prices.apartment);
                   setBtnTarget(4);
                 }}
               >
@@ -137,6 +154,26 @@ function Calculator() {
                 <h3>Customize</h3>
               </button>
             </section>
+            {/* Aviso para actualizar plan */}
+            {planData.id === 1 && (
+              <span>To use the other features, upgrade your plan!</span>
+            )}
+            {/* Input para colocar un precio personalizado */}
+            {btnTarget === 4 && (
+              <section className="personal-price">
+                <h3>Enter the personalized price of your property in USD</h3>
+                <form onSubmit={handleEditCustomPrice}>
+                  <input
+                    type="number"
+                    value={tempCustomPrice}
+                    onChange={(e) => setTempCustomPrice(e.target.value)}
+                  />
+                  <button className="style-btn-white" type="submit">
+                    <FaArrowRight className="icon" />
+                  </button>
+                </form>
+              </section>
+            )}
             <div className="bottom-div">
               {/* Seccion de estadisticas */}
               <section className="container">
@@ -180,7 +217,31 @@ function Calculator() {
                     <FaRegFileExcel className="icon" /> Import
                   </button>
                 </header>
-                <table></table>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Conteo de meses</th>
+                      <th>Mes</th>
+                      <th>Dinero invertido</th>
+                      <th>Procentaje</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {data.map((item) => (
+                      <tr key={item.id}>
+                        <td>{item.id}</td>
+                        <td>{item.nombre}</td>
+                        <td>{item.ciudad}</td>
+                        <td>
+                          {item.precio.toLocaleString("en-US", {
+                            style: "currency",
+                            currency: "USD",
+                          })}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </section>
             </div>
           </section>
