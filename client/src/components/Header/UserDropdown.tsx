@@ -11,7 +11,7 @@ import { getDaysRemaining } from "../../utils/getDaysRemaining "; //funcion para
 interface UserDropdownProps {
   email: string;
   planType: string;
-  updatePlanDate: string | null;
+  update_plan_date: string | null;
   planDuration: string | null;
   setIsProfile: Function;
   setIsConfiguration: Function;
@@ -22,7 +22,7 @@ const UserDropdown = forwardRef<HTMLDivElement, UserDropdownProps>(
     {
       email,
       planType,
-      updatePlanDate,
+      update_plan_date,
       planDuration,
       setIsProfile,
       setIsConfiguration,
@@ -47,7 +47,7 @@ const UserDropdown = forwardRef<HTMLDivElement, UserDropdownProps>(
           planType === "Free"
             ? "Switch to higher plan"
             : `You have ${getDaysRemaining(
-                updatePlanDate,
+                update_plan_date,
                 planDuration
               )} days left`,
         onClick: () => navigate("/viewPlans"),

@@ -23,18 +23,18 @@ export const authProvider = async (req, res) => {
       user = await UserModel.create({
         uid,
         name: name || "Anonymous",
-        email: userEmail,
+        email: email,
         avatar: picture || null,
         country: country,
         city: city,
         savings: null,
-        planId: 1,
+        plan_id: 1,
         plantExpirationDate: null,
       });
     }
 
     // Obtenemos el plan actual del usuario
-    const plan = await PlanModel.findOne({ where: { id: user.planId } });
+    const plan = await PlanModel.findOne({ where: { id: user.plan_id } });
 
     res.status(200).json({ user, plan });
   } catch (error) {
@@ -45,14 +45,14 @@ export const authProvider = async (req, res) => {
 
 // Cambiar plan de usuario
 export const changePlan = async (req, res) => {
-  const { userUid, planId } = req.body;
+  const { userUid, plan_id } = req.body;
 
   try {
     const user = await UserModel.findOne({ where: { uid: userUid } });
-    const plan = await PlanModel.findOne({ where: { id: planId } });
+    const plan = await PlanModel.findOne({ where: { id: plan_id } });
 
-    user.planId = planId;
-    user.updatePlanDate = new Date();
+    user.plan_id = plan_id;
+    user.update_plan_date = new Date();
     await user.save();
 
     res.status(200).json(plan);

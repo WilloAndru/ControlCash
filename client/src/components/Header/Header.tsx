@@ -100,7 +100,7 @@ function Header() {
             <UserDropdown
               email={userData.email}
               planType={planData.name}
-              updatePlanDate={userData.updatePlanDate}
+              update_plan_date={userData.update_plan_date}
               planDuration={planData.duration}
               ref={dropdownRef}
               setIsProfile={setIsProfile}

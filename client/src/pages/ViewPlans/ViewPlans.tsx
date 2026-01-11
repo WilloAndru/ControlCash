@@ -39,10 +39,10 @@ function ViewPlans() {
   }, []);
 
   // Funcion que redirigue al pago
-  const handleCheckout = async (paymentProviderId: string) => {
+  const handleCheckout = async (payment_provider_id: number) => {
     try {
       const { data } = await axios.post(`${URL}/checkout`, {
-        paymentProviderId,
+        payment_provider_id,
       });
 
       if (data.url) {
@@ -53,23 +53,23 @@ function ViewPlans() {
     }
   };
 
-  // Funcion para cambiar de plan
-  const handleChangePlan = async (userUid: string, planId: number) => {
+  // Funcion para cambiar de plan, solo para test
+  const handleChangePlan = async (userUid: string, plan_id: number) => {
     try {
       const response = await axios.patch(`${URL}/changePlan`, {
         userUid,
-        planId,
+        plan_id,
       });
       if (response.status === 200) {
-        userData.planId = planId;
-        userData.updatePlanDate = new Date();
+        userData.plan_id = plan_id;
+        userData.update_plan_date = new Date();
         localStorage.setItem("userData", JSON.stringify(userData));
         const planData = {
           id: response.data.id,
           name: response.data.name,
           price: response.data.price,
           duration: response.data.duration,
-          paymentProviderId: response.data.paymentProviderId,
+          payment_provider_id: response.data.payment_provider_id,
         };
         localStorage.setItem("planData", JSON.stringify(planData));
         navigate("/");
@@ -100,12 +100,12 @@ function ViewPlans() {
                 </div>
                 <button
                   className="style-btn-black"
-                  disabled={index === 0 || userData?.planId === index + 1}
-                  onClick={() => handleCheckout(item.paymentProviderId)}
+                  disabled={index === 0 || userData?.plan_id === index + 1}
+                  onClick={() => handleCheckout(item.payment_provider_id)}
                 >
                   {index === 0
                     ? "Default Plan"
-                    : userData?.planId === index + 1
+                    : userData?.plan_id === index + 1
                     ? "Your current plan"
                     : "Get Started"}
                 </button>
@@ -117,7 +117,7 @@ function ViewPlans() {
                   <p>{item.description}</p>
                 </div>
                 <ul>
-                  {JSON.parse(item.features).map((f: string, i: number) => (
+                  {item.features.map((f: string, i: number) => (
                     <li key={i}>
                       {listIconsFeatures[i]}
                       {f}
@@ -125,11 +125,11 @@ function ViewPlans() {
                   ))}
                 </ul>
                 <button
-                  disabled={userData?.planId === index + 1}
+                  disabled={userData?.plan_id === index + 1}
                   className="style-btn-black"
-                  onClick={() => handleChangePlan(userData?.uid, index + 1)}
+                  onClick={() => handleChangePlan(userData.uid, item.id)}
                 >
-                  Change to this Plan (For testing only)
+                  Change to this Plan (Test)
                 </button>
               </section>
             </section>

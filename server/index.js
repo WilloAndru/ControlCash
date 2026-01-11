@@ -11,12 +11,11 @@ app.use(express.json());
 app.get("/", (req, res) => res.json({ msg: "API funcionando" }));
 app.use("/api", routes);
 
-// Conexion a db
-const PORT = 4000;
+const PORT = 8000;
 
 try {
   await db.authenticate();
-  console.log("✅ Conexión a MySQL establecida");
+  console.log("✅ Conexión a Postgre establecida");
 
   app.listen(PORT, () => {
     console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);

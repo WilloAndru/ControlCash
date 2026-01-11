@@ -1,10 +1,10 @@
 export const getDaysRemaining = (
-  updatePlanDate: string | null,
+  update_plan_date: string | null,
   planDuration: string | null
 ): number | null => {
-  if (!updatePlanDate || !planDuration) return null;
+  if (!update_plan_date || !planDuration) return null;
 
-  const startDate = new Date(updatePlanDate);
+  const startDate = new Date(update_plan_date);
   const durationInMonths = parseInt(planDuration, 10);
 
   // Calcular fecha de expiración sumando meses
