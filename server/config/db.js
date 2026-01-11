@@ -1,7 +1,8 @@
+import pg from "pg"; // IMPORTANTE, PARA FORZAR A VERCEL SERVERLESS A USAR PG
 import { Sequelize } from "sequelize";
-import dotenv from "dotenv";
+import "dotenv/config";
 
-dotenv.config();
+const isProduction = process.env.NODE_ENV === "production";
 
 const db = new Sequelize(
   process.env.PGDATABASE,
@@ -9,8 +10,18 @@ const db = new Sequelize(
   process.env.PGPASSWORD,
   {
     host: process.env.PGHOST,
+    port: Number(process.env.PGPORT) || 5432,
     dialect: "postgres",
-    port: process.env.PGPORT || 5432,
+    dialectModule: pg,
+    logging: false,
+    dialectOptions: isProduction
+      ? {
+          ssl: {
+            require: true,
+            rejectUnauthorized: false,
+          },
+        }
+      : {},
   }
 );
 

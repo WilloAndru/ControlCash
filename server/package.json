@@ -1,5 +1,10 @@
 {
+  "name": "server",
+  "version": "1.0.0",
   "type": "module",
+  "scripts": {
+    "dev": "nodemon server.js"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
@@ -15,10 +20,7 @@
     "stripe": "^18.4.0"
   },
   "devDependencies": {
+    "@types/express": "^5.0.6",
     "nodemon": "^3.1.10"
-  },
-  "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
   }
 }
